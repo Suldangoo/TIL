@@ -1,6 +1,21 @@
-# **Markdown**
->마크다운(Markdown)은 쓰고 읽기가 간편한 일반 텍스트 경향의 마크업 언어이다.
+# **목차**
+- [**목차**](#목차)
+- [**Markdown (마크다운)**](#markdown-마크다운)
+- [**마크다운 문법**](#마크다운-문법)
+  - [1. 제목 (Headers)](#1-제목-headers)
+  - [2. 목록](#2-목록)
+  - [3. 코드 삽입](#3-코드-삽입)
+  - [4. 인용 문구 (BlockQuote)](#4-인용-문구-blockquote)
+  - [5. 수평선](#5-수평선)
+  - [6. 강조](#6-강조)
+  - [7. 줄 바꿈](#7-줄-바꿈)
+  - [8. 링크](#8-링크)
+  - [9. 테이블](#9-테이블)
+
+# **Markdown (마크다운)**
+>마크다운(Markdown)은 2004년 존 그루버가 제작한 일반 텍스트 기반의 마크업 언어이다.
 - 일반 텍스트로 서식이 있는 문서를 작성할 때 사용한다.
+- HTML로 변환이 가능하며, 깃허브 내 리포지토리의 README.md 또한 마크다운 문서이다.
 - 확장자명은 .md이다.
 - 깃허브 내에서 .md파일을 편집할 수도 있으나, 별도의 편집기를 활용한 후 push를 하는 방법도 있다.
   
@@ -9,7 +24,7 @@
 
 # **마크다운 문법**
 
-## 1. 제목
+## 1. 제목 (Headers)
 - #을 사용하는 방법
 
 ```
@@ -33,7 +48,7 @@
 
 ```
 - 순서가 없는 목록은
-* '-' 혹은 '*'를 앞에 입력해 작성 가능하다
+* '-' 혹은 '+', '*'를 앞에 입력해 작성 가능하다
 ```
 
 - 순서가 있는 목록
@@ -43,9 +58,27 @@
 2. '1.' 처럼 숫자와 점을 입력해 작성 가능하다
 ```
 
+- 혼합 사용
+
+```
+* 1단계
+    - 2단계
+        + 3단계
+```
+
+* 1단계
+    - 2단계
+        + 3단계
+
 <br>
 
 ## 3. 코드 삽입
+- 4개의 공백 혹은 하나의 탭으로 코드 삽입
+
+```
+    코드...
+````
+
 - '```'를 사용해 코드 삽입
 
 <pre>
@@ -71,10 +104,10 @@
 
 ```
 > 인용 문구
->> 서브 인용문구
+>   > 서브 인용문구
 ```
 > 인용 문구
->> 인용문구
+>   > 인용문구
 
 <br>
 
@@ -91,4 +124,181 @@
 
 <br>
 
-## 6. 강조문
+## 6. 강조
+
+```
+*이태릭체*
+**볼드체**
+~~취소선~~
+```
+
+*이태릭체*   
+**볼드체**   
+~~취소선~~
+
+<br>
+
+## 7. 줄 바꿈
+
+```
+문장 마지막에서 띄어쓰기를 세 칸 넣거나,   
+다른 방법으로 <br> 태그를 사용하거나,
+마지막 방법으로 <p></p> 를 사용하면 줄이 바뀐다.
+```
+
+문장 마지막에서 띄어쓰기를 세 칸 넣거나,   
+다른 방법으로 <br> 태그를 사용하거나,
+마지막 방법으로 <p> </p> 를 사용하면 줄이 바뀐다.
+
+<br>
+
+## 8. 링크
+
+- 참조 링크
+
+```
+참조 링크는 대괄호 두 개를 사용한다.
+
+Link : [Google][googlelink]
+
+[googlelink] : https://google.com "Go google"
+```
+
+Link: [Google][googlelink]
+
+[googlelink]: https://google.com "Go google"
+
+- 외부 링크
+
+```
+외부 링크는 대괄호 하나와 소괄호 하나를 사용한다.
+
+[Google](https://google.com)
+```
+
+[Google](https://google.com)
+
+```
+이를 이용하면 리포지토리 내에서 md 문서간의 이동 혹은 헤더로의 이동을 할 때도 사용할 수 있다.
+편집기를 활용하면 자동완성 덕분에 쉽게 입력이 가능하다.
+
+[예시 1. README.md로 이동](../README.md)   
+[예시 2. Markdown.md의 제목 문단으로 이동](#1-제목-headers)
+```
+
+[예시 1. README.md로 이동](../README.md)   
+[예시 2. Markdown.md의 제목 문단으로 이동](#1-제목-headers)
+
+<br>
+
+## 9. 테이블
+
+- Markdown 코드를 활용한 테이블
+
+```
+<!-- Markdown -->
+Title1|Title2
+-|-
+content1|content2
+content3|content4
+  
+Title1|Title2|Title3
+:-|:-:|-:
+content1|content2|content3
+```
+
+<!-- Markdown -->
+Title1|Title2
+-|-
+content1|content2
+content3|content4
+  
+Title1|Title2|Title3
+:-|:-:|-:
+content1|content2|content3
+
+- Html 코드를 활용한 테이블
+
+```
+<!-- Html -->
+<figure>
+    <table>
+        <thead>
+            <tr>
+                <th>Title1</th>
+                <th>Title2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>content1</td>
+                <td>content2</td>
+            </tr>
+            <tr>
+                <td>content3</td>
+                <td>content4</td>
+            </tr>
+        </tbody>
+    </table>
+</figure>
+  
+<figure>
+    <table>
+        <thead>
+            <tr>
+                <th style='text-align:left;' >Title1</th>
+                <th style='text-align:center;' >Title2</th>
+                <th style='text-align:right;' >Title3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style='text-align:left;' >content1</td>
+                <td style='text-align:center;' >content2</td>
+                <td style='text-align:right;' >content3</td>
+            </tr>
+        </tbody>
+    </table>
+</figure>
+```
+
+<!-- Html -->
+<figure>
+    <table>
+        <thead>
+            <tr>
+                <th>Title1</th>
+                <th>Title2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>content1</td>
+                <td>content2</td>
+            </tr>
+            <tr>
+                <td>content3</td>
+                <td>content4</td>
+            </tr>
+        </tbody>
+    </table>
+</figure>
+  
+<figure>
+    <table>
+        <thead>
+            <tr>
+                <th style='text-align:left;' >Title1</th>
+                <th style='text-align:center;' >Title2</th>
+                <th style='text-align:right;' >Title3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style='text-align:left;' >content1</td>
+                <td style='text-align:center;' >content2</td>
+                <td style='text-align:right;' >content3</td>
+            </tr>
+        </tbody>
+    </table>
+</figure>

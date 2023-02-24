@@ -189,6 +189,19 @@ Link: [Google][googlelink]
 [예시 1. README.md로 이동](../README.md)   
 [예시 2. Markdown.md의 제목 문단으로 이동](#1-제목-headers)
 
+- 자동 연결
+
+```
+자동 연결은 홑화살괄호 하나를 사용한다.
+일반적인 URL 혹은 이메일 주소는 해당 방식이 적절하다.
+
+- 외부 링크 : <https://google.com>
+- 이메일 링크 : <example@example.com>
+```
+
+- 외부 링크 : <https://google.com>
+- 이메일 링크 : <example@example.com>
+
 <br>
 
 ## 9. 테이블

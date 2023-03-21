@@ -1,22 +1,22 @@
 # **Today I Learned (TIL)**
-    ¿À´Ã °øºÎÇÑ ³»¿ëÀ» Á¤¸®ÇÕ´Ï´Ù.
+    ì˜¤ëŠ˜ ê³µë¶€í•œ ë‚´ìš©ì„ ì •ë¦¬í•©ë‹ˆë‹¤.
 
 <br>
     
 ## **Computer Architecture**
-- [ÄÄÇ»ÅÍ ±¸Á¶ ÀÌÇØ](Computer%20Architecture/ÄÄÇ»ÅÍ%20±¸Á¶%20ÀÌÇØ.md)
+- [ì»´í“¨í„° êµ¬ì¡° ì´í•´](Computer%20Architecture/ì»´í“¨í„°%20êµ¬ì¡°%20ì´í•´.md)
 
 <br>
 
 ## **Unity**
 - [C#](Unity/C#.md)
-- [À¯´ÏÆ¼ ¿£Áø](Unity/À¯´ÏÆ¼%20¿£Áø.md)
+- [ìœ ë‹ˆí‹° ì—”ì§„](Unity/ìœ ë‹ˆí‹°%20ì—”ì§„.md)
 
 <br>
 
-## **ÀÚ°ÝÁõ**
-- [Á¤º¸Ã³¸®±â´É»ç ÇÊ±â](ÀÚ°ÝÁõ/Á¤º¸Ã³¸®±â´É»ç%20ÇÊ±â.md)
-- [Á¤º¸Ã³¸®±â´É»ç ½Ç±â](ÀÚ°ÝÁõ/Á¤º¸Ã³¸®±â´É»ç%20½Ç±â.md)
+## **ìžê²©ì¦**
+- [ì •ë³´ì²˜ë¦¬ê¸°ëŠ¥ì‚¬ í•„ê¸°](ìžê²©ì¦/ì •ë³´ì²˜ë¦¬ê¸°ëŠ¥ì‚¬%20í•„ê¸°.md)
+- [ì •ë³´ì²˜ë¦¬ê¸°ëŠ¥ì‚¬ ì‹¤ê¸°](ìžê²©ì¦/ì •ë³´ì²˜ë¦¬ê¸°ëŠ¥ì‚¬%20ì‹¤ê¸°.md)
 
 <br>
 

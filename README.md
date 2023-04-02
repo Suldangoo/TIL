@@ -1,10 +1,16 @@
-# **Today I Learned (TIL)**
+﻿# **Today I Learned (TIL)**
     오늘 공부한 내용을 정리합니다.
 
 <br>
     
 ## **Computer Architecture**
 - [컴퓨터 구조 이해](Computer%20Architecture/컴퓨터%20구조%20이해.md)
+
+<br>
+
+## **CS**
+- [네트워크](CS/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC.md0)
+- [자료구조](CS/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0.md)
 
 <br>
 

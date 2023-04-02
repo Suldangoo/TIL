@@ -9,7 +9,7 @@
 <br>
 
 ## **CS**
-- [네트워크](CS/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC.md0)
+- [네트워크](CS/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC.md)
 - [자료구조](CS/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0.md)
 
 <br>

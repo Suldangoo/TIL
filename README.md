@@ -7,6 +7,7 @@
 - [컴퓨터 구조 시작하기](Computer%20Architecture/01.%20%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0.md)
 - [데이터](Computer%20Architecture/02.%20%EB%8D%B0%EC%9D%B4%ED%84%B0.md)
 - [명령어](/Computer%20Architecture/03.%20명령어.md)
+- [CPU의 작동 원리](/Computer%20Architecture/04.%20CPU의%20작동%20원리.md)
 
 <br>
 

@@ -8,6 +8,7 @@
 - [데이터](Computer%20Architecture/02.%20%EB%8D%B0%EC%9D%B4%ED%84%B0.md)
 - [명령어](/Computer%20Architecture/03.%20명령어.md)
 - [CPU의 작동 원리](/Computer%20Architecture/04.%20CPU의%20작동%20원리.md)
+- [CPU 성능 향상 기법](/Computer%20Architecture/05.%20CPU%20성능%20향상%20기법.md)
 
 <br>
 

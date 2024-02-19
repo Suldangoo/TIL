@@ -11,6 +11,7 @@
 - [CPU 성능 향상 기법](/Computer%20Architecture/05.%20CPU%20성능%20향상%20기법.md)
 - [메모리와 캐시 메모리](/Computer%20Architecture/06.%20메모리와%20캐시%20메모리.md)
 - [보조기억장치](/Computer%20Architecture/07.%20보조기억장치.md)
+- [입출력장치](/Computer%20Architecture/08.%20입출력장치.md)
 
 <br>
 

@@ -181,3 +181,16 @@
 - Clamp는 Min과  Max 두 함수를 합쳐놓은 개념
     - 정해진 값을 Min보다 작아지지 않게, Max보다 커지지 않게 막아주는 함수
     - Clamp는 경계를 포함해서 리턴한다.
+
+## For Loop, While Loop
+
+- For Loop, While Loop 둘 다 노드로서 존재하는 반복문
+- While Loop
+    - 컨디션이 참이라면 반복하다가 거짓이 되면 빠져나오는 노드
+    - 무한 루프가 실행되면 에러가 터짐
+- For Loop, For Loop with Break
+    - First Index에서 Last Index까지 인덱스에 변화를 주며 반복
+    - First Index에서 1씩 더해가는데, 인덱스를 모두 포함하기 때문에 0부터 5까지 했다면 0과 5를 포함하여 (마지막 값을 포함) 반복 후 벗어나게 된다
+    - 도중 빠져나오고 싶을 때 break가 포함된 노드를 사용
+    - 앞 진행 사항 도중 break로 진행 선을 뒤로 연결해주면 됨
+        - 선 정리할 때 더블클릭으로 포인트 생성 후 컨트롤 클릭으로 정리

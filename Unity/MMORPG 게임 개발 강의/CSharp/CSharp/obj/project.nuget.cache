@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "57hOsyPBzOo05wHk+mWBGMqTUzUtk0T9HkoNPcJ/GttHx5EX6fZjWMhcpIGwKjEYVxrddNcY+CmYqsIz9kaNIA==",
+  "dgSpecHash": "sVRATpV9tLm9KJrHFLFIO/ziuTGTybTuM2mzhlUqV3KNx46IwDxhglXV9ihke8oWlu4Fy9vXuSvhfgEa7qnscw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Junyeong\\Documents\\Git\\TIL\\Unreal\\입문자를 위한 UE5\\CSharp\\CSharp\\CSharp.csproj",
+  "projectFilePath": "C:\\Users\\Junyeong\\Documents\\Git\\TIL\\Unity\\MMORPG 게임 개발 강의\\CSharp\\CSharp\\CSharp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

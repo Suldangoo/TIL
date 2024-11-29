@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Junyeong\\Documents\\Git\\TIL\\Unreal\\입문자를 위한 UE5\\CSharp\\CSharp\\CSharp.csproj",
+      "projectUniqueName": "C:\\Users\\Junyeong\\Documents\\Git\\TIL\\Unity\\MMORPG 게임 개발 강의\\CSharp\\CSharp\\CSharp.csproj",
       "projectName": "CSharp",
-      "projectPath": "C:\\Users\\Junyeong\\Documents\\Git\\TIL\\Unreal\\입문자를 위한 UE5\\CSharp\\CSharp\\CSharp.csproj",
+      "projectPath": "C:\\Users\\Junyeong\\Documents\\Git\\TIL\\Unity\\MMORPG 게임 개발 강의\\CSharp\\CSharp\\CSharp.csproj",
       "packagesPath": "C:\\Users\\Junyeong\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Junyeong\\Documents\\Git\\TIL\\Unreal\\입문자를 위한 UE5\\CSharp\\CSharp\\obj\\",
+      "outputPath": "C:\\Users\\Junyeong\\Documents\\Git\\TIL\\Unity\\MMORPG 게임 개발 강의\\CSharp\\CSharp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Junyeong\\AppData\\Roaming\\NuGet\\NuGet.Config",

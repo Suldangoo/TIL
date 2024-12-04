@@ -181,3 +181,15 @@ string message = $"당신의 HP는 {a} 입니다.";
 | string → int | int.Parse(스트링 변수); |
 | --- | --- |
 | int → string | 인트 변수.ToString(); |
+
+### 산술 연산 (데이터 가공)
+
+```csharp
+int hp = 100;
+int damage = 10;
+
+hp = hp - damage;
+```
+
+- 기본적인 사칙연산, 나머지, 괄호 연산 등은 여타 프로그래밍 언어와 동일하다.
+- int 대상으로 나누기 연산을 하게 되면, 소수점 아래 부분은 모두 버려진다.

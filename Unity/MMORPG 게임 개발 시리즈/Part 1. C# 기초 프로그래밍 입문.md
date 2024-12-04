@@ -132,3 +132,14 @@ string name = "Suldangoo";
     - char형은 C++에선 1바이트지만, C#에선 2바이트이다.
 - 컴퓨터가 한글, 영어, 중국어 등을 이해하고 저장할 수 있는 것은, 해당 글자와 매칭되는 정수를 저장하고 인코딩을 하는 원리이기 때문이다.
     - 인코딩 방식엔 ASCII, Unicode, UTF-8, 16 등등 다양한 포맷이 존재한다.
+
+### boolean
+
+```csharp
+bool isAdmin = true;
+bool isAutoPlay = false;
+```
+
+- 오로지 true와 false만을 저장하게 되는 아주 작은 데이터 타입.
+- 컴퓨터 로직 내에서 true와 false만을 사용하는 경우가 매우 잦기 때문에 존재하는 근간이 되는 자료형이다.
+- true와 false는 앞 글자를 소문자로 표기한다.

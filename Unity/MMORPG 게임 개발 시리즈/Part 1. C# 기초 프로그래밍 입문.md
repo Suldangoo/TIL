@@ -250,4 +250,20 @@ var c = "Rookiss";
 
 # **3. 코드의 흐름 제어**
 
-### if와 else
+### if와 else, 분기문
+
+```csharp
+if (isDead) { // 첫 번째 중괄호의 위치 (컨벤션)은 팀마다 다르다.
+	Console.WriteLine("");
+}
+else if (isAlive) {
+	Console.WriteLine("");
+}
+else {
+	Console.WriteLine("");
+}
+```
+
+- else if 와 else문을 사용하지 않고, 모두 if문을 사용할 수도 있지만, 그럴 경우 논리적으로 실행되지 않아도 되는 조건문마저 크로스체크를 하여 조금씩 성능을 갉아먹을 수 있다.
+- 물론 논리적으로 if문 여러개를 쓰는 것이 정답인 코드가 있을 수 있으니, 코드의 논리를 잘 따져야 한다.
+

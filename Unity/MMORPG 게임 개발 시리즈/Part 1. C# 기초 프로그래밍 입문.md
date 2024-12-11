@@ -300,3 +300,63 @@ bool isPair = (number % 2) == 0 ? true : false;
 
 - 삼항연산자는 취향에 따라 가독성을 나쁘다고 생각하는 개발자도 있다.
 - 그러나 잘 숙지하여 다른 개발자가 적은 삼항연산자는 반드시 읽을 줄 알아야 한다.
+
+### 가위바위보
+
+```csharp
+Random rand = new Random();
+int aiChoice = rand.Next(0, 3); // 0 ~ 2 사이의 랜덤 값
+
+int choice = Convert.ToInt32(Console.ReadLine());
+
+switch (choice) {
+	case 0 :
+		Console.WriteLine("당신의 선택은 가위입니다.");
+		break;
+	case 1 :
+		Console.WriteLine("당신의 선택은 바위입니다.");
+		break;
+	case 2 :
+		Console.WriteLine("당신의 선택은 보입니다.");
+		break;
+}
+
+switch (aiChoice) {
+	case 0 :
+		Console.WriteLine("컴퓨터의 선택은 가위입니다.");
+		break;
+	case 1 :
+		Console.WriteLine("컴퓨터의 선택은 바위입니다.");
+		break;
+	case 2 :
+		Console.WriteLine("컴퓨터의 선택은 보입니다.");
+		break;
+}
+
+int result; // 승패를 가리는 변수, 0은 무승부, 1은 승리, 2는 패배
+
+// 승패판정
+if (choice == aiChoice) {
+	result = 0;
+}
+else if ((choice == 0 && aiChoice == 2) ||
+				 (choice == 1 && aiChoice == 0) ||
+				 (choice == 2 && aiChoice == 1)) {
+	result = 1;
+}
+else {
+	result = 2;
+}
+
+switch (result) {
+	case 0 :
+		Console.WriteLine("비겼습니다.");
+		break;
+	case 1 :
+		Console.WriteLine("승리하였습니다.");
+		break;
+	case 2 :
+		Console.WriteLine("패배하였습니다.");
+		break;
+}
+```

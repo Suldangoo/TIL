@@ -482,3 +482,59 @@ for (~) {
 
 - break문은 해당 중괄호만 나가는게 아니라, for문 등 큰 반복문의 키워드가 범위이다.
 - continue로 해당 페이지를 빠져나갔다면, 당연히 조건 변수에 증감을 주는 반복식은 실행이 된다.
+
+### 함수 (메소드)
+
+- 지금까지의 코딩은 main 안에 모든걸 욱여넣는 방식
+- 이제부터 재사용될 코드들은 하나로 묶어서 하나의 기능으로 캡슐화해야한다.
+- 해당 명령어의 묶음을 사용하는 걸 메소드를 사용한다고 한다.
+    - C#에서는 메소드지만, 다른 언어에선 펑션, 함수, 프로시저 등등 많은 용어가 있다.
+
+```csharp
+한정자 반환형식 이름(매개변수) {
+
+}
+
+static void HelloWorld() {
+	...
+}
+
+static int Add(int a, int b) {
+	return a + b;
+}
+
+static void Main(string[] args) {
+	HelloWorld();
+}
+```
+
+- class 안에 Main 함수를 포함하여, 원하는 메서드를 작성한다.
+- return 값에  따라 반환 형식을 결정해야 한다.
+
+```csharp
+static void AddOne(int n) {
+	n++;
+}
+
+static void Main(string[] args) {
+	int a = 0;
+	AddOne(a); // 이거 해도, 값은 1이 아닌, 0 그대로 유지된다.
+}
+```
+
+- 상식적으로 위 함수에 a를 넣어 변수 값이 1 늘어날 것 같지만, 절대 아니다.
+- 변수를 넘기는 방법엔 복사와 참조가 있는데, 여기선 복사로 주기 때문에 완전히 다른 변수가 된다.
+
+```csharp
+static void AddOne(ref int n) {
+	n++;
+}
+
+static void Main(string[] args) {
+	int a = 0;
+	AddOne(ref a); // 이거 해도, 값은 1이 아닌, 0 그대로 유지된다.
+}
+```
+
+- 단, 파라미터와 호출 변수에 ref를 넣으면, 그때부턴 복사가 아닌 참조로 파라메터를 가져온다.
+- 이렇게 되면 실제로 넣는 원본 변수에 영향을 끼치게 된다.

@@ -360,3 +360,63 @@ switch (result) {
 		break;
 }
 ```
+
+### 상수와 열거형
+
+- 위 가위바위보 코드에서, 우리는 가위, 바위, 보를 숫자 0, 1, 2로 정의했다.
+- 이렇게 int 변수의 수에 원하는 정의를 내리니, 코딩도 복잡하며, 추후에 유지관리가 매우 힘들다.
+- 이렇게 강제로, 임의적으로 숫자에 의미를 박아넣는 것은 하드코딩이며, 절대로 해선 안될 일이다.
+
+```csharp
+const int ROCK = 1; // 전부 대문자를 씀으로서 절대 변하면 안되는 변수라는것을 표시
+const int PAPER = 2;
+const int SCISSORS = 0;
+
+switch (choice) {
+	case SCISSORS :
+		Console.WriteLine("당신의 선택은 가위입니다.");
+		break;
+	case ROCK :
+		Console.WriteLine("당신의 선택은 바위입니다.");
+		break;
+	case PAPER :
+		Console.WriteLine("당신의 선택은 보입니다.");
+		break;
+}
+```
+
+- switch-case 문에서 case 뒤에, 값이 유동적으로 변하는 변수는 절대 들어갈 수 없다.
+    - 반드시 값이 절대 변하지 않는, 상수가 들어가야 한다.
+- 따라서 변수 설정 앞에 const를 넣음으로서 해당 변수를 상수화하고, switch-case문으로도 사용 가능하게 한다.
+- 상수를 사용하는 것도 좋지만, 이름이 겹치지 않게 조심해야 하며, 각 변수가 서로 연관이 있는 개념임에도 서로 하나의 그룹으로서 사용할 수 없다.
+    - 이 때 사용하는 것이 Enum, 열거형이다.
+
+```csharp
+class Program {
+	enum Choice { // 열거형 생성
+		Rock = 1, // 뒤에 값을 정의하지 않으면 알아서 위에부터 0이 된다.
+		Paper = 2,
+		Scissors = 0
+	}
+	
+	static void Main(string[] args) {
+		// ...
+		
+		switch (choice) {
+			case (int)Choice.Scissors :
+				Console.WriteLine("당신의 선택은 가위입니다.");
+				break;
+			case (int)Choice.Rock :
+				Console.WriteLine("당신의 선택은 바위입니다.");
+				break;
+			case (int)Choice.Paper :
+				Console.WriteLine("당신의 선택은 보입니다.");
+				break;
+		}
+	}
+}
+```
+
+- Enum으로 만들어 하나의 그룹으로서 묶어 자료형처럼 사용할 수 있다.
+- Enum으로 선언한 값이 숫자처럼 보여도, Enum 타입이기 때문에 (int)로 한 번 캐스팅을 거쳐주어야 한다.
+- 상수든 Enum이든 코드에 따라 맞는, 좋은 타입을 설정하면 되고, 중요한 것은 코드 로직 내부에 숫자를 박아 하드코딩을 하는 일이 없도록 하는 것이다.

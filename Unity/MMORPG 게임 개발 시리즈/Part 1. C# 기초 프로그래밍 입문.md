@@ -538,3 +538,28 @@ static void Main(string[] args) {
 
 - 단, 파라미터와 호출 변수에 ref를 넣으면, 그때부턴 복사가 아닌 참조로 파라메터를 가져온다.
 - 이렇게 되면 실제로 넣는 원본 변수에 영향을 끼치게 된다.
+
+### ref, out
+
+- ref로 원본을 변화하는 모델과, 그냥 원래 메소드 방식으로 return받는 모델 중 후자가 훨씬 더 범용적이고 코드 디자인적으로 좋다.
+- 그럼에도 swap() 함수 등 실제로 ref를 쓰는 편이 좋은 부분도 분명 있다.
+- 반대로, 파라메터에 out을 넣어서 원하는 변수만 리턴시키는 기능도 존재한다.
+
+```csharp
+static void Divide(int a, int b, out int result1, out int result2) {
+	result1 = a / b;
+	result2 = a % b;
+}
+
+static void Main(string[] args) {
+	int result1;
+	int result2;
+	
+	Divide(10, 3, out result1, out result2);
+}
+```
+
+- out 키워드를 넣음으로서, 해당 함수에서 그 변수에 일어난 결괏값을 그대로 적용해줄수도 있다.
+    - 값을 여러개 반환할 경우엔 out을 사용한다.
+- ref는 그 파라메터를 넣지 않아도 되지만, out은 반드시 리턴할 변수를 넣어주어야 해서 오류를 잡아준다.
+- 또한 반환형이 int인 함수에서 float를 반환할 수 있는 등, 복수의 리턴이 필요할 때 굉장히 좋다.

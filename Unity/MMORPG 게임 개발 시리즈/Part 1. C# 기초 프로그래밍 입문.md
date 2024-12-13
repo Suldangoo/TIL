@@ -602,3 +602,103 @@ Add(1, 2, d:2.0f); // 원하는 파라미터에 원하는 값을 넣도록 명�
 ```
 
 - 순서와 관계없이 원하는 파라미터에 원하는 값을 넣도록 명시할 수 있다.
+
+### 연습문제
+
+- 구구단
+
+```csharp
+namespace CSharp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            for (int i = 2; i < 10; i++)
+            {
+                for (int j = 1; j < 10; j++)
+                {
+                    Console.WriteLine($"{i} * {j} = {i * j}");
+                }
+            }
+        }
+    }
+}
+```
+
+- 별찍기
+
+```csharp
+namespace CSharp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                for (int j = 1; j <= i; j++)
+                {
+                    Console.Write("*");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
+```
+
+- 팩토리얼
+
+```csharp
+using System;
+
+namespace CSharp
+{
+    class Program
+    {
+        static int Factorial(int n)
+        {
+            int result = 1;
+
+            while(n > 1)
+            {
+                result *= n;
+                n--;
+            } 
+
+            return result;
+        }
+
+        static void Main(string[] args)
+        {
+            int ret = Factorial(5);
+            Console.WriteLine(ret);
+        }
+    }
+}
+```
+
+```csharp
+using System;
+
+namespace CSharp
+{
+    class Program
+    {
+        static int Factorial(int n)
+        {
+            if (n <= 0)
+                return 1;
+
+            return n * Factorial(n - 1);
+        }
+
+        static void Main(string[] args)
+        {
+            int ret = Factorial(5);
+            Console.WriteLine(ret);
+        }
+    }
+}
+```

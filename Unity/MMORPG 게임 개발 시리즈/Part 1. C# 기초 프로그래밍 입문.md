@@ -777,3 +777,17 @@ player.hp = 100; // 해당 객체의 hp 멤버에 값을 초기화
 - 객체의 구성 요소는 **속성과 기능**으로 분류할 수 있다.
     - 속성 : hp, attack, pos 등등 데이터
     - 기능 : Move, Attack, Die 등등 해당 객체가 수행하는 행동
+- 객체를 정의한다는 것은 붕어빵 틀과 유사하다. 객체를 정의한 후, 실제로 해당 객체가 필요할 때 객체를 찍어내면 된다.
+
+```csharp
+class Knight
+{
+	public int hp; // 접근 지정자는 보통 private로 두고, getter와 setter를 두는 편이다.
+	public int attack;
+	
+	public void Move()
+	{
+		Console.WriteLine("Knight's Move");
+	}
+}
+```

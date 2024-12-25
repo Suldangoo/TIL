@@ -791,3 +791,13 @@ class Knight
 	}
 }
 ```
+- 이렇게 만든 객체 설계도로, 메인 코드에서 객체를 생성할 수 있다.
+
+```csharp
+Knight knight = new Knight(); // new는 해당 객체를 새로 생성한다는 생성자이다.
+
+knight.hp = 100;
+knight.attack = 10;
+
+knight.Move();
+```

@@ -998,3 +998,22 @@ Mage mage = new Player(); // 불가능
 - 그러나 Mage → Player → Mage로 변환을 해야할 때는 분명히 있다. 바로 위의 부모를 인자를 받은 함수가 그렇다.
     - Mage → Player는 간단하다. 그냥 Player 변수를 선언해서 넣어주면 된다.
     - 그러나 Player → Mage는 위에서 말한 오류로 인해 불가능하다. 이 땐 임의적으로 캐스팅을 해도 좋다고 개발자가 명시해주어야 한다.
+```csharp
+Player player = mage;
+Mage mage = (Mage)player;
+```
+
+- 이렇게 메이지를 플레이어로 바꾸었다고 해서, 해당 객체가 메이지의 기능을 잃어버린 것은 절대로 아니다. 애초에 객체는 참조타입이다. 원본은 분명히 어딘가에 잘 갖추어져 있고, Player일 동안엔 Mage 고유의 기능을 잠시 사용하지 않는 것 뿐이다.
+- 그러나 만약 캐스팅을 했으나, 예외로 인해 나이트가 (Mage) 뒤에 들어왔다면 어떻게 될까?
+    - 문법상엔 아무런 문제가 없다. 그러나 당연히 프로그램을 실행하면 크래쉬가 난다.
+- 때문에 한 번 해당 Player가 정말로 Mage가 맞는지 질문을 하고, 맞다면 통과하면 된다.
+
+```csharp
+bool isMage = (player is Mage);
+
+if (isMage)
+{
+	Mage mage = (Mage)player;
+	mage.mp -= 10;
+}
+```

@@ -1060,3 +1060,11 @@ public sealed override void Move() {}
 ```
 
 - 또한 sealed 키워드를 오버라이드 앞에 붙여 더 이상 자신의 자식들은 오버라이딩 하지 못하게끔 막는 것 또한 가능하다.
+
+### 문자열 둘러보기
+
+```csharp
+string name = "Harry Potter";
+```
+
+- string은 기본적인 자료형이 아닌, 객체로서 존재하는 문자열 자료형이기 때문에 다양한 기능들을 제공한다.

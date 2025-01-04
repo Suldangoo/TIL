@@ -1068,3 +1068,9 @@ string name = "Harry Potter";
 ```
 
 - string은 기본적인 자료형이 아닌, 객체로서 존재하는 문자열 자료형이기 때문에 다양한 기능들을 제공한다.
+- 찾기
+
+```csharp
+bool fount = name.Contains("Harry"); // true. 문자열 찾기
+int index = name.IndexOf('P'); // 6. 문자의 위치 찾기, 없다면 -1 리턴
+```

@@ -1071,7 +1071,7 @@ string name = "Harry Potter";
 - 찾기
 
 ```csharp
-bool fount = name.Contains("Harry"); // true. 문자열 찾기
+bool fount = name.Contains("Harry"); // true. 원하는 문자열 찾기
 int index = name.IndexOf('P'); // 6. 문자의 위치 찾기, 없다면 -1 리턴
 ```
 - 변형

@@ -1074,3 +1074,19 @@ string name = "Harry Potter";
 bool fount = name.Contains("Harry"); // true. 문자열 찾기
 int index = name.IndexOf('P'); // 6. 문자의 위치 찾기, 없다면 -1 리턴
 ```
+- 변형
+
+```csharp
+name = name + " Junior"; // 문자열 추가
+
+string lowerCase = name.ToLower(); // 모든 문자를 소문자로
+string upperCase = name.ToUpper(); // 모든 문자를 대문자로
+
+string replaceCase = name.Replace('r', 'l'); // 앞 인자 문자를 뒤 인자 문자로 변경
+```
+- 분할
+
+```csharp
+string[] names = name.Split(ner char[] {' '}); // 공백을 기준으로 분할하여 배열에 저장
+string subCase = name.Substring(5); // 인자 번지부터 맨 뒤까지 잘라 새로운 문자열로 리턴
+```

@@ -1213,3 +1213,20 @@ static int GetHighestScore(int[] scores)
 	return max;
 }
 ```
+```csharp
+static int GetAverageScore(int[] scores)
+{
+	if (scores.Length == 0)
+		return 0;
+		
+	int sum = 0;
+	
+	foreach (int score in scores) {
+		sum += score;
+	}
+	
+	
+	
+	return (sum / scores.Length);
+}
+```

@@ -1258,3 +1258,23 @@ static void Sort(int[] scores) // 버블정렬로 구현
 	}
 }
 ```
+```csharp
+static void Sort(int[] scores) // 선택정렬로 구현
+{
+	for(int i = 0; i < scores.Length; i++)
+	{
+		int min = i; // 가장 작은 요소의 인덱스
+		
+		for(int j = i; j < scores.Length; j++)
+		{
+			if (scores[j] < scores[min]) {
+				min = j;
+			}
+			
+			int temp = scores[i];
+			scores[i] = scores[min];
+			scores[min] = temp;
+		}
+	}
+}
+```

@@ -1242,3 +1242,19 @@ static int GetIndexOf(int[] scores, int value)
 	return -1;
 }
 ```
+```csharp
+static void Sort(int[] scores) // 버블정렬로 구현
+{
+	for(int i = 0; i < scores.Length - 1; i++)
+	{
+		for(int j = 0; j < scores.Length - 1; j++)
+		{
+			if (scores[j] > scores[j + 1]) {
+				int temp = scores[j];
+				scores[j] = scores[j + 1];
+				scores[j + 1] = temp;
+			}
+		}
+	}
+}
+```

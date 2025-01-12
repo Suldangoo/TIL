@@ -1230,3 +1230,15 @@ static int GetAverageScore(int[] scores)
 	return (sum / scores.Length);
 }
 ```
+```csharp
+static int GetIndexOf(int[] scores, int value)
+{
+	for(int i = 0; i < scores.Length; i++)
+	{
+		if (scores[i] == value)
+			return i;
+	}
+	
+	return -1;
+}
+```

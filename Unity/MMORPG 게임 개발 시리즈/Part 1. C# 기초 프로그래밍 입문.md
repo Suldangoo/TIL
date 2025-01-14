@@ -1302,3 +1302,18 @@ a[0] = new int [3];
 a[1] = new int [6];
 a[2] = new int [2];
 ```
+
+### List
+
+- 배열의 단점은 초기화하는 시점에서 크기가 고정된다는 점이다.
+- 그래서 크기를 동적으로 바꾸는, 동적 배열인 List가 있다.
+- 원하는 크기보다 더 큰 크기가 필요하게 되면, 그 때 새로운 배열을 초기화 후 데이터를 이주하는 방식으로 동적 리사이징이 이루어진다.
+
+```csharp
+using System.Collections.Generic;
+
+List<int> list = new List<int>();
+List<float> list = new List<float>();
+```
+
+- 여기서 쓰는 꺽쇠 <>는 제네릭이라고 하여 어떠한 자료형이든 넣을 수 있는 키워드이다.

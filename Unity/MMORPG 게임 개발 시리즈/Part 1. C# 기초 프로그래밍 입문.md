@@ -1329,3 +1329,24 @@ list.Clear(); // 리스트 내용 초기화
 
 - 동적 배열 자료구조를 알고있다면 알겠지만, 리스트 내부에 값을 삽입하고 리사이징되는 것은 자료구조 측면에서 그다지 효율적이지 않다.
 - 리사이징 과정에서 복사가 필연적으로 이루어지기 때문이다.
+
+### Dictionary
+
+- 리스트 또한 단점이 있다.
+    - 게임 내 플레이어, 몬스터는 대부분 ID를 부여하여 ID로 검색 및 식별을 하게 된다.
+    - ID : 액션으로 보통 네트워크와 클라이언트가 소통을 하게 되는데, 리스트로 구현을 하게 되면 리스트를 두 개 만들거나, 모든 몬스터, 플레이어 객체의 크기만큼 리스트를 초기화해야한다.
+- 이 때 필요한 것이 Key → Value, 즉 키가 있다면 해당 값을 빠르게 찾아오는 자료구조이다.
+- 이것이 딕셔너리, Dictionary이다.
+
+```csharp
+using System.Collections.Generic;
+
+Dictionary<int, Monster> dic = new Dictionary<int, Monster>();
+
+dic.Add(0, new Monster()); // Key : 0 / Value : Monster 객체
+dic[5] = new Monster(); // Key : 5 / Value : Monster 객체
+
+dic[5000] // 5000번 Key를 가진 몬스터
+```
+
+- 딕셔너리는 존재하지 않는 Key를 조회하려고 하면 에러가 터진다.

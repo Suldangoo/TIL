@@ -1507,3 +1507,31 @@ Main()
 메서드이기 때문에 신규 악당 캐릭터도 악당 인터페이스를 상속받았다면 사용 가능해진다!
 
 </aside>
+
+### Property (프로퍼티)
+
+- 프로퍼티에 대해 알기 위해선 은닉성에 다시 집중할 필요가 있다.
+    - 특정 멤버 변수를 public으로 열기 보다는 Getter, Setter를 쓰는 것이 유용할 때가 많다.
+- 그러나 변수가 굉장히 많다면 덩달아 Get과 Set이 굉장히 많아진다.
+- C#은 이를 조금 더 편리하게 하기 위한 문법인 프로퍼티가 마련되어있다.
+
+```csharp
+class Knight
+{
+	protected int hp;
+	
+	public int Hp // 프로퍼티는 이름 뒤에 괄호가 아예 붙지 않는다.
+	{
+		get { return hp; }
+		set { hp = value; } // 여기서 value라는 변수는 프로퍼티에 예약된 키워드이다.
+	}
+}
+
+static void Main()
+{
+	Knight knight = new Knight();
+	
+	knight.Hp = 100; // 알아서 set 프로퍼티 사용
+	int hp = knight.Hp; // 알아서 get 프로퍼티 사용
+}
+```

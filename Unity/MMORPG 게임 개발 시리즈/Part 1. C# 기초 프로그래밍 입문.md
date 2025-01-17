@@ -1667,3 +1667,53 @@ Main()
 
 - 즉 여기서 d는 return이 void이고, 인풋이 int인 모든 함수들을 대리하는 대리자가 될 수 있다.
 - d = new dele(Method1); 처럼 객체 생성도 되고, 위처럼 d = Method1; 로 바로 매길 수 있다.
+
+### Event(이벤트)
+
+- 델리게이트는 그 어떤 곳에서도 호출이 될 수 있기 때문에 정말 중요한 대리자가 원하지 않는 곳에서 임의적으로 호출될 수 있는 단점이 있다.
+- 그래서 델리게이트를 wrapping하는, Event라는 문법이 존재한다.
+- 특정 조건이 만족했을 때, 특정 신호를 모두에게 브로드캐스팅하고, 해당 이벤트를 구독한 객체들은 그 신호를 수신하는 방식이다.
+
+```csharp
+class InputManager
+{
+	// 키보드나 마우스의 입력을 감지해서 게임 로직에 알려주는 클래스
+	
+	public delegate void OnInputKey();
+	public event OnInputKey InputKey; // 이벤트로 만들어 델리게이트 변수 생성
+	
+	public void Update()
+	{
+		if (Console.KeyAvailable == false)
+			return;
+		
+		ConsoleKeyInfo info = Console.ReadKey();
+		
+		if (info.Key == ConsoleKey.A)
+		{
+			// A 입력 사실을 브로드캐스팅
+			// 해당 부분에 직접 게임속 로직을 넣는 것은 매우 비효율적
+			
+			InputKey();
+		}
+	}
+}
+
+static void OnInputTest()
+{
+	Console.WriteLine("Input Received!");
+}
+
+Main()
+{
+	InputManager inputManager = new InputManager();
+	
+	// 구독 신청, 신호를 받았을 때 수행하고 싶은 로직
+	inputManager.InputKey += OnInputTest;
+	
+	while (true)
+	{
+		inputManager.Update();
+	}
+}
+```

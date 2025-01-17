@@ -1535,3 +1535,27 @@ static void Main()
 	int hp = knight.Hp; // 알아서 get 프로퍼티 사용
 }
 ```
+- 프로퍼티 안의 get, set 앞에 private 등의 접근 지정자를 붙일 수 있다.
+- 여기서 더 나아가 자동구현 프로퍼티라는 편리한 방식이 존재한다.
+    - 멤버 변수 필드를 선언하고, 프로퍼티를 만드는데, 여기서 멤버 변수 필드를 정의하는 과정을 스킵할 수 있다.
+
+```csharp
+class Knight
+{
+	// 멤버 변수 필드는 스킵한다.
+	public int Hp { get; set; }
+	
+	// 위 한 줄은 아래와 같은 역할을 한다.
+	private int _hp;
+	public int GetHp() { return _hp; } // 물론 실제로 이 이름의 함수가 만들어지는건 아니다.
+	public void SetHp(int value) { _hp = value; }
+}
+
+static void Main()
+{
+	Knight knight = new Knight();
+	
+	knight.Hp = 100; // 알아서 set 프로퍼티 사용
+	int hp = knight.Hp; // 알아서 get 프로퍼티 사용
+}
+```

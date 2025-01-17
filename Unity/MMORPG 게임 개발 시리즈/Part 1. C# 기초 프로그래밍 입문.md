@@ -1370,3 +1370,42 @@ dic.Clear();
 - 추후 어떤 키 값을 찾을 때, 똑같은 해시 함수를 돌려 나온 바구니만 검색하면 아주 빠르게 검색이 가능하다.
 - 단 해시 테이블을 많이 마련해두기 때문에 메모리가 많이 필요하다.
     - 즉, 메모리를 많이 내주고, 성능을 많이 취하는 자료구조이다.
+
+# 8. 알아두면 유용한 기타 문법
+
+### Generic (일반화)
+
+- 특정 자료구조를 사용할 때, 꺽쇠 안에 원하는 자료형을 삽입하는 것.
+- List<int> 처럼 그 안에 원하는 자료형을 넣음으로서 어떤 자료형이든 호환되게 한다.
+
+```csharp
+class MyList<T>
+{
+	T[] arr = new T[10];
+	
+	public T GetItem(int i)
+	{
+		return arr[i];
+	}
+}
+
+Main() {
+	MyList<int> list1 = new MyList<int>();
+	MyList<float> list1 = new MyList<float>();
+	MyList<Monster> list1 = new MyList<Monster>();
+}
+```
+
+```csharp
+static void Test<T>(T input) {
+
+}
+
+Main() {
+	Test<int>(3);
+	Test<float>(3.0f);
+}
+```
+
+- 한 마디로 자료형을 위한 파라미터 라고도 할 수 있다.
+- 자료형이 여러개인 버전의 함수를 다양하게 만들지 않고, 제네릭을 사용해 함축시킬 수 있다.

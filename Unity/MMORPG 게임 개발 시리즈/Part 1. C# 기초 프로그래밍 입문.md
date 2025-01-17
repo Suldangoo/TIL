@@ -1592,3 +1592,78 @@ Main()
 ```
 
 - 이런 식으로 함수 내부에서 역으로 우리의 기능을 호출시키는 것을 콜백이라고 한다.
+```csharp
+delegate int OnClicked();
+// delegate가 붙었으니 형식은 형식이나, 함수 자체를 인자로 넘겨주는 형식
+// 반환은 int, 입력은 void, 이름은 OnClicked
+
+static void ButtonPressed(OnClicked clickedFunction)
+{
+	clickedFunction();
+}
+
+static int TestDelegate()
+{
+	Console.WriteLine("Hello Delegate"); // 실행 결과
+	return 0;
+}
+
+Main()
+{
+	ButtonPressed(TestDelegate);
+}
+```
+
+- 혹은 델레게이트 객체를 만들어서, 해당 객체에 원하는 함수를 넣어놓고 사용할 수 있다.
+- 이렇게 사용하게 되면 델레게이트 체이닝, 즉 여러 함수를 순서대로 묶어 한 번에 매크로처럼 활용하는 것이 가능하다.
+
+```csharp
+delegate int OnClicked();
+
+static void ButtonPressed(OnClicked clickedFunction)
+{
+	clickedFunction();
+}
+
+// 1번 함수
+static int TestDelegate1()
+{
+	Console.WriteLine("Hello Delegate 1");
+	return 0;
+}
+
+// 2번 함수
+static int TestDelegate2()
+{
+	Console.WriteLine("Hello Delegate 2");
+	return 0;
+}
+
+Main()
+{
+	OnClicked clicked = new OnClicked(TestDelegate1);
+	clicked += TestDelegate2; // 체이닝
+	
+	ButtonPressed(clicked); // 두 함수를 한 번에 실행
+}
+```
+
+- 한 마디로 아래의 예시처럼, 여러 함수를 하나의 대리자가 해줄 수 있는 것이다.
+
+```csharp
+delegate void dele(int a);
+
+Main()
+{
+	dele d; // 델리게이트 변수 생성
+	
+	d = Method1;
+	d(10); // Method 1이라는 이름의 메서드 실행
+	
+	d = Method2;
+	d(20); // Method 2이라는 이름의 메서드 실행
+}
+```
+
+- 즉 여기서 d는 return이 void이고, 인풋이 int인 모든 함수들을 대리하는 대리자가 될 수 있다.
+- d = new dele(Method1); 처럼 객체 생성도 되고, 위처럼 d = Method1; 로 바로 매길 수 있다.

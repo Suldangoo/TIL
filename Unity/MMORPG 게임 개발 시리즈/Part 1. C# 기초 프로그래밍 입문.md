@@ -1928,3 +1928,66 @@ class Monster
 - Reflection과 Attribute를 사용하면, C# 코드에서 사용된 부분이 유니티 툴 안에서도 적용이 되도록 연동할 수 있다.
     - 예를 들어 SerializeField같은 Attribute를 사용하여 private인 변수를 인스펙터에서도 보이게 할 수 있다.
 - 또한 유니티가 아니라 엑셀이나 다른 프로그램에서 C# 코드를 파싱해서 데이터를 읽고 싶을 때, 이렇게 고유의 Attribute를 만들어 필드에 매겨주면, 전용 프로그램이나 외부 프로그램에서 한 번에 코드를 읽고 파싱해오기도 간편하다.
+
+### Nullable (널러블)
+
+- Null이 포함될 수 있는 자료형을 정의하는 것을 의미한다.
+- 키워드로는 자료형 바로 뒤에 ? (물음표) 를 붙여 사용한다.
+- 만약 몬스터를 Find하는 메서드를 만들었을 때, 찾고자 하는 몬스터가 있다면 해당 몬스터를 반환하겠지만, 그 몬스터가 없다면 null을 리턴하도록 만들 수 있다.
+
+```csharp
+Monster monster = FindMonster(101);
+if (monster != null)
+{
+
+}
+```
+
+- 그러나 이게 가능한 이유는 class 그 자체는 참조 타입이고, 그 자체가 null을 허용하기 때문이다.
+- 만약 null을 리턴하는 것이 어려운 메서드 리턴 자료형이라면 어떻게 해야 할까?
+
+```csharp
+static int Find() // 리턴 자료형이 인트이다.
+{
+
+	return null; // 반드시 int를 리턴해야 하는데, null은 리턴할 수 없다.
+}
+```
+
+- 여기서 우리가 사용할 수 있는것이 널러블이며, 자료형 뒤에 ?를 붙여 사용한다.
+
+```csharp
+int? number = null; // 가능!
+
+number = 3;
+int a = number; // 불가능! 널러블 변수를 int 변수로 캐스팅할 수 없다.
+int a = number.Value; // 가능! 해당 변수의 값을 가져와 적용한다.
+// 단, 만약 null값을 .Value로 가져와 옮겨버리면 바로 크래시가 터진다.
+
+if (number.HasValue)
+{
+	// HasValue를 사용하면 null이 아님을 보장한다.
+}
+```
+
+- 그러나 이렇게 매번 널러블 함수를 int 변수 등으로 캐스팅 할 때마다 널 체크를 하는 것이 귀찮다.
+- 그럴 때 사용되는 것이 바로 ?? 연산자이다.
+
+```csharp
+int b = number ?? 0; // 만약 number가 null이 아니라면 값을 넣고, null이라면 0을 넣는다.
+
+// 위 한 줄은 비슷한 연산자인 삼항 연산자와 유사하다.
+int b = (number != null) ? number.Value : 0;
+```
+
+- 또한 특정 객체가 null인지 아닌지를 체크하여, null이 아니라면 해당 객체의 멤버를 가져오도록 할 수도 있다.
+
+```csharp
+int? id = monster?.id; // ?. 연산자를 사용한다.
+
+// 위 한 줄은 아래와 같은 로직이다.
+if (monster == null)
+	id = null;
+else
+	id = monster.id;
+```

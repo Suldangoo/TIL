@@ -1814,3 +1814,42 @@ Func<Item, bool> selector = (Item item) => { return item.ItemType == ItemType.we
 
 Item item = FindItem(selector)
 ```
+
+### Exception (예외 처리)
+
+```csharp
+try
+{
+
+}
+catch (Exception e)
+{
+
+}
+```
+
+- try문 안에서 명령을 수행하다가 에러가 발생하면 catch문을 실행하는 예외처리문
+- 소프트웨어 개발 시엔 매우 중요하나, 게임 개발에선 사실 그렇게 많이 사용되는 문법은 아니다.
+- try 안에서 일어나는 예외적인 상황은 여러 가지가 있을 수 있다.
+    - 0으로 나눌 때
+    - 잘못된 메모리를 참조 (널 참조)
+    - 오버플로우 등등
+- 여기서 Exception은 모든 오류가 전부 포함되어 들어갈 수 있는 만능 오류 자료형이다.
+- 오류 종류에 따라서 예외 처리를 다르게 할 수 있다. 이럴 땐 catch를 여러 개 쓰고, 자료형을 다른 걸로 나누면 된다.
+
+```csharp
+try {}
+catch (DivideByZeroException e) {}
+catch (Exception e) {} // Exception은 최상위 조상이기 때문에 가장 밑에다가 둔다.
+```
+
+- 중요한 것은 에러가 났을 때, 에러가 난 줄을 포함해 그 아래의 명령어들은 실행이 되지 않는다.
+- 만약 에러가 났든, 나지 않았든 최종적으로 실행되어야 하는 구문이 있다면 finally를 사용한다.
+
+```csharp
+try {} // 실행
+catch () {} // 에러 시 실행
+finally {} // 에러가 났든 안났든 최종적으로 실행
+```
+
+- finally 안에는 DB 접속 해제, 파일 정리 등등을 넣을 수 있다.

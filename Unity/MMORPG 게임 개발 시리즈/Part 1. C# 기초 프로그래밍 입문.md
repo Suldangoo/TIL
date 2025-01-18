@@ -1751,3 +1751,37 @@ Main()
 ```
 
 - 위와 같은 코드가 있을 때, IsWeapon말고도 이것이 방패인지, 악세사리인지, 레어도가 높은지 등등 다양한 버전이 생길 터인데, 그럴 때마다 저렇게 함수를 계속 만들어버리면 함수가 무분별하게 늘어날 것이다.
+- 함수 내 기능이 비교적 간단하고, 똑같은 버전이 여러 개 계속해서 만들어질 것 같을 때, 이 때 Lambda를 사용할 수 있다.
+
+```csharp
+delegate bool ItemSelector(Item item); // 델리게이트
+
+static Item FindItem(ItemSelector selector) {}
+
+Main()
+{
+	Item item = FindItem(delegate (Item item) {
+		return item.ItemType == ItemType.weapon;
+	});
+}
+```
+
+- IsWeapon이라는 함수의 이름을 짓지 않고, 내용물을 그대로 델리게이트 인자 안에 함수로 넣어버려 익명 함수, 혹은 무명 함수로 만들 수 있다.
+    - 이 때 필요한 것은 인자 앞에 delegate 키워드를 붙이는 것이다.
+    - 저 함수가 다양한 곳에서 사용될 것이 아닌, 정말 저 때 한 번 사용될 것이라면 매우 좋다.
+- 그러나 이 함수는 아직 람다 함수는 아니고, 그냥 무명 함수, 혹은 익명 함수이다.
+- 추후 C#이 이 과정마저 단축하기 위해 람다 문법을 만들었다.
+
+```csharp
+delegate bool ItemSelector(Item item); // 델리게이트
+
+static Item FindItem(ItemSelector selector) {}
+
+Main()
+{
+	Item item = FindItem((Item item) => { return item.ItemType == ItemType.weapon; });
+}
+```
+
+- delegate 키워드를 제거하고, ⇒라는 화살표 기호를 사용하여 람다 함수를 만들 수 있다.
+- 물론 델리게이트 객체를 new로 만들어서 안에 넣으면 변수화하여 여러번 사용할 수 있다.

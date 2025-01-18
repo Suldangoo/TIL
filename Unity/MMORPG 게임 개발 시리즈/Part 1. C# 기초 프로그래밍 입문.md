@@ -1785,3 +1785,32 @@ Main()
 
 - delegate 키워드를 제거하고, ⇒라는 화살표 기호를 사용하여 람다 함수를 만들 수 있다.
 - 물론 델리게이트 객체를 new로 만들어서 안에 넣으면 변수화하여 여러번 사용할 수 있다.
+### Func, Action
+
+- 델리게이트 자체는 함수 안에 인자로 넣을 수 있는 형식이다.
+- 이 델리게이트에도 제네릭을 사용하여 인자와 리턴을 임의로 설정할 수 있다.
+
+```csharp
+delegate Return MyFunc<T, Return>(T item);
+delegate Return MyFunc<T1, T2, Return>(T1 item1, T2 item2);
+delegate Return MyFunc<Return>();
+```
+
+- 위와 같은 버전으로 인자가 여러개인 버전, 리턴이 void인 버전의 델리게이트를 만들면 이런 형식이 필요할 때 MyFunc만 쓰면 모든 곳에 적용이 된다.
+- 이걸 알고, C#에선 이미 위와같은 델리게이트를 만들어두었다.
+
+```csharp
+Func<Item, bool>();
+Action<Item>();
+```
+
+- 즉, 델리게이트를 직접 선언하지 않아도, 이미 만들어진 프리셋이 존재한다.
+- 반환 타입이 필요할 경우 Func, 반환 타입이 필요 없을 경우 Action을 사용한다.
+- Func와 Action 모두 최대 16개까지의 인풋 제네릭이 존재하므로 웬만해선 다 가능하다.
+- 따라서 위의 람다 함수를 Func로 사용한다면
+
+```csharp
+Func<Item, bool> selector = (Item item) => { return item.ItemType == ItemType.weapon; };
+
+Item item = FindItem(selector)
+```

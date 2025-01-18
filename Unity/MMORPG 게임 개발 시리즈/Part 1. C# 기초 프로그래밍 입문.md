@@ -1910,3 +1910,21 @@ foreach (FieldInfo field in fields) // 받은 필드들을 모두 돌아볼 수 
 
 - 위 문법을 통해 원하는 클래스의 필드를 전부 런타임 내부에서 볼 수 있다.
 - 그 외에도 프로퍼티나 생성자 정보, 이벤트, 인터페이스, 함수 등등을 모두 열어볼 수 있다.
+- 또한 세트로 런타임 내에서 힌트가 되는 주석인 Attribute를 알아볼 수 있다.
+
+```csharp
+class Important : System.Attribute
+{
+
+}
+
+class Monster
+{
+	[Important] public int hp; // 런타임에서 체크할 수 있는 주석
+}
+```
+
+- 이 문법은 C# 그 자체보다는 유니티에서 자주 쓰인다.
+- Reflection과 Attribute를 사용하면, C# 코드에서 사용된 부분이 유니티 툴 안에서도 적용이 되도록 연동할 수 있다.
+    - 예를 들어 SerializeField같은 Attribute를 사용하여 private인 변수를 인스펙터에서도 보이게 할 수 있다.
+- 또한 유니티가 아니라 엑셀이나 다른 프로그램에서 C# 코드를 파싱해서 데이터를 읽고 싶을 때, 이렇게 고유의 Attribute를 만들어 필드에 매겨주면, 전용 프로그램이나 외부 프로그램에서 한 번에 코드를 읽고 파싱해오기도 간편하다.

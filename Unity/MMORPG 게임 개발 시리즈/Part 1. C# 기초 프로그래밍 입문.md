@@ -1879,3 +1879,34 @@ Main()
 
 - 그러나 게임에서는 보통 크래시가 나면, 예외 처리를 하기 보다는 크래시가 나도록 냅두고, 최대한 빨리 크래시를 해결하도록 움직이는 것이 중요하다.
 - 실질적으로 게임 로직 안에서 유용하게 사용될 때는 네트워크 접속, 로그인 시도 후 에러가 났을 때 오류가 났음을 알려주는 용도에서 잘 쓰인다.
+
+### Reflection (리플렉션)
+
+- 쉽게 말해 X-Ray를 찍는 것이다.
+- 우리가 만든 모든 클래스들은 전부 .GetType()이라는 메서드를 정의하지 않아도 사용할 수 있다.
+- 왜냐면 C#에서의 모든 객체들은, 전부 최상위 클래스인 object를 포함하고 있고, 그 object에 포함되어있는 메서드이기 때문이다.
+    - 그 외에도 Equals, ToString 등등 다양한 메서드가 존재한다.
+
+```csharp
+using System.Reflection;
+
+Type type = monster.GetType(); // 이 문법을 사용해 몬스터의 타입을 알 수 있다.
+
+var fields = type.GetFields(System.Reflection.BindiingFlags.Public
+	| System.Reflection.BindiingFlags.NonPublic
+	| System.Reflection.BindiingFlags.Static
+	| System.Reflection.BindiingFlags.Instance); // 타입에서 원하는 정보를 검색할 수 있다.
+	
+	
+foreach (FieldInfo field in fields) // 받은 필드들을 모두 돌아볼 수 있다.
+{
+	string access = "protected";
+	if (field.IsPublic) access = "public";
+	else if (field.IsPrivate) access = "private";
+	
+	Console.WriteLine($"{access} {field.FieldType.Name} {field.Name}");
+}
+```
+
+- 위 문법을 통해 원하는 클래스의 필드를 전부 런타임 내부에서 볼 수 있다.
+- 그 외에도 프로퍼티나 생성자 정보, 이벤트, 인터페이스, 함수 등등을 모두 열어볼 수 있다.

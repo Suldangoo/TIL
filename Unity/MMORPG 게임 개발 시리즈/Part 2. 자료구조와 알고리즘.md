@@ -15,3 +15,43 @@
     - 50을 먼저 말하고 up / down을 들으며 이분 탐색을 한다면 O(log n)이 소요된다.
 - Big-O 표기법은 웬만하면 해당 알고리즘의 최악의 경우를 따진다.
     - 그러나 퀵 정렬처럼 최악의 경우가 이론적으로 거의 등장하지 않는다면 무시하기도 한다.
+```csharp
+Main()
+{
+	Console.CursorVisible = false;
+	
+	const int WAIT_TICK = 1000 / 30; // 1/30초
+	const char CIRCLE = '\u25cf';
+	
+	int lastTick = 0; // 마지막 시간
+	while (true)
+	{
+		#region 프레임 관리
+		int currentTick = System.Environment.TickCount;
+		if (currentTick - lastTick < WAIT_TICK)
+			continue; // 연산 프레임이 되지 않았으므로 다음 프레임으로 스킵
+			
+		lastTick = currentTick;
+		#endregion
+		
+		// 입력
+		
+		// 로직
+		
+		// 렌더링
+		Console.SetCursorPosition(0, 0);
+		
+		for (int i = 0; i < 25; i++)
+		{
+			for (int j = 0; j < 25; j++)
+			{
+				Console.ForegroundColor = ConsoleColor.Green; // 색 결정
+				Console.Write(CIRCLE); // 쓰기
+			}
+			Console.WriteLine();
+		}
+	}
+}
+```
+
+- 위와 같은 기본적인 코드를 두고 시작한다.

@@ -113,3 +113,24 @@ class MyList<T>
 
 - Count와 Capacity는 실제로 동적 배열을 만들 때 오피셜로 사용하는 변수명이다.
 - 동적 배열에 데이터를 넣는 과정과, 리사이징을 직접 구현할 수 있다.
+```csharp
+public void Add(T item)
+{
+    // 1. 공간이 충분히 남아있는지 확인
+    if (Count >= Capacity)
+    {
+        // 리사이징을 통해 공간 확보
+        T[] newArray = new T[Count * 2];
+        for (int i = 0; i < Count; i++)
+            newArray[i] = _data[i];
+
+        _data = newArray; // 원본에 새로운 배열을 삽입
+    }
+
+    // 2. 공간에 데이터를 삽입
+    _data[Count] = item;
+    Count++; // 데이터 개수 증가
+}
+```
+
+- 동적 배열에서 데이터를 가져오는 것을 Index와 프로시저를 활용해 구현할 수 있다.

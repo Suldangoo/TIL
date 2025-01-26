@@ -134,3 +134,12 @@ public void Add(T item)
 ```
 
 - 동적 배열에서 데이터를 가져오는 것을 Index와 프로시저를 활용해 구현할 수 있다.
+```csharp
+public T this[int index] // 인덱스
+{
+    get { return _data[index]; }
+    set { _data[index] = value; }
+}
+```
+
+- 동적 배열에서 데이터를 삭제하는 것을 구현할 수 있다.

@@ -86,3 +86,30 @@ public LinkedList<int> _data3 = new LinkedList<int>(); // 연결 리스트
 
 - 맵이 실시간으로 바뀌는 것이 아닌 이상, 보통 고정적이기 때문에 삽입 / 삭제가 효율이 좋은 연결 리스트는 맵을 만들 때 적합하지 않다.
 - 동적 배열의 리사이징은 단점이지만, 맵의 크기가 게임 도중 늘어났다 줄어드는 일이 크게 없기 때문에 일반 정적 배열이 가장 효율이 좋다.
+```csharp
+_data2.Add(101);
+_data2.Add(102);
+_data2.Add(103);
+_data2.Add(104);
+_data2.Add(105);
+
+int temp = _data2[2]; // 탐색
+_data2.RemoveAt(2); // 삭제
+```
+
+- 동적 배열은 위와 같이 삽입, 탐색, 삭제를 할 수 있다.
+- 동적 배열을 직접 클래스와 제네릭을 활용해 만들 수 있다.
+
+```csharp
+class MyList<T>
+{
+    const int DEFAULT_SIZE = 1;
+    T[] _data = new T[DEFAULT_SIZE]; // 기본 배열 초기화
+
+    public int Count = 0; // 실제로 사용중인 데이터 개수
+    public int Capacity { get { return _data.Length; } } // 예약된 데이터 개수
+}
+```
+
+- Count와 Capacity는 실제로 동적 배열을 만들 때 오피셜로 사용하는 변수명이다.
+- 동적 배열에 데이터를 넣는 과정과, 리사이징을 직접 구현할 수 있다.

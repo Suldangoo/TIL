@@ -143,3 +143,21 @@ public T this[int index] // 인덱스
 ```
 
 - 동적 배열에서 데이터를 삭제하는 것을 구현할 수 있다.
+```csharp
+public void RemoveAt(int index) // 주소를 활용해 삭제
+{
+    for (int i = index; i < Count - 1; i++)
+    {
+        _data[i] = _data[i + 1]; // 뒤에있는 값들을 하나씩 앞으로 끌고오기
+    }
+
+    _data[Count - 1] = default(T); // 가장 마지막 원소를 기본값으로 초기화
+    Count--;
+}
+```
+
+- 이렇게 만들어진 동적 배열은 실제로 사용할 수 있다.
+
+```csharp
+public MyList<int> _data = new MyList<int>();
+```

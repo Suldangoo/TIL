@@ -272,3 +272,24 @@ RPG 게임에서 인벤토리에 희귀도순이나 획득 순 정렬은 많이 
     - 위 과정을 반복하다가, 인접한 모든 노드가 방문했다면 뒤로 돌아간다.
     - 이전 노드들 중에서 방문하지 않은 노드를 인접하는 노드가 있다면 방문한다.
     - 모든 노드를 방문했다면 탐색을 종료한다.
+
+```csharp
+void DFS( Vertex * V )
+{
+	Edge* E = NULL;
+	
+	printf("%d ", V -> Data);
+	
+	V -> Visited = Visited' // 방문한 정점을 방문 체크
+	
+	E = V -> AdjacencyList;
+	
+	while ( E != NULL ) // 현재 정점의 모든 인접 정점에 대해 DFS 재귀 호출
+	{
+		if ( E -> Target != NULL && E -> Target -> Visited == NotVisited )
+			DFS( E -> Target ); // 인접 정점을 대상으로 다시 DFS 수행
+			
+		E = E -> Next;
+	}
+}
+```

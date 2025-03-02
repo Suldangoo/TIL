@@ -280,7 +280,7 @@ void DFS( Vertex * V )
 	
 	printf("%d ", V -> Data);
 	
-	V -> Visited = Visited' // 방문한 정점을 방문 체크
+	V -> Visited = Visited; // 방문한 정점을 방문 체크
 	
 	E = V -> AdjacencyList;
 	

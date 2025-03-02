@@ -301,3 +301,37 @@ void DFS( Vertex * V )
     - 시작 정점을 방문체크하고 큐에 삽입한다.
     - 큐에서 정점을 제거하고, 제거한 정점에 인접한 노드 중 방문하지 않은 모든 정점을 모두 방문 체크 후 큐에 넣는다.
     - 이를 반복하다가 큐가 비면 탐색이 끝난 것이다. 큐가 빌 때까지 반복한다.
+
+```csharp
+void BFS( Vertex * V, LinkedQueue* Queue )
+{
+	Edge* E = NULL;
+	
+	printf("%d ", V -> Data);
+	
+	V -> Visited = Visited; // 방문한 정점을 방문 체크
+	
+	LQ_Enqueue( Queue, LQ_CreateNode( V ) ); // 시작 정점 큐에 삽입
+	
+	while ( !LQ_IsEmpty( Queue) ) // 큐가 빌 때까지 반복
+	{
+		Node* Popped = LQ_Dequeue( Queue ); // 큐에서 전단 제거
+		V = Popped -> Data;
+		E = V -> AdjacencyList;
+		
+		while ( E != NULL ) // 큐에서 꺼낸 정점의 인접 정점 조사
+		{
+			V = E -> Target;
+			
+			if ( V != NULL && V -> Visited == NotVisited ) // 미방문 정점만 방문
+			{
+				printf("%d ", V -> Data);
+				V -> Visited = Visited;
+				LQ_Enqueue( Queue, LQ_CreateNode( V ) );
+			}
+				
+			E = E -> Next;
+		}
+	}
+}
+```

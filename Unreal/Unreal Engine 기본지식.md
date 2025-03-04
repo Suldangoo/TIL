@@ -79,6 +79,18 @@
     - 결과적으로 C++ 변수를 블루프린트에서 조작 가능하게 한다.
 - UFUNCTION()을 통해 블루프린트에서 함수 호출이 가능하다.
 
+| 부모 클래스 | 역할 | 언제 사용? | 예제 |
+| --- | --- | --- | --- |
+| **AActor** | 기본적인 게임 오브젝트 | 게임 내 오브젝트(아이템, 문, 상호작용 오브젝트 등) | `AWeapon`, `AChest` |
+| **ACharacter** | 이동, 점프, 애니메이션 포함된 캐릭터 | 플레이어, NPC, 적 캐릭터를 만들 때 | `APlayerCharacter`, `AEnemyCharacter` |
+| **APawn** | 직접 제어 가능한 오브젝트 (Character보다 기능 적음) | 캐릭터 이외의 조종 가능한 것 (예: 탱크, 비행기) | `AVehiclePawn`, `AJetPawn` |
+| **APlayerController** | 플레이어의 입력을 처리 | 키보드/마우스 입력, UI 클릭 처리 | `AMyPlayerController` |
+| **AAIController** | AI가 캐릭터를 조종하도록 함 | NPC나 몬스터의 AI 동작 | `AEnemyAIController` |
+| **AGameModeBase** | 게임의 규칙을 정함 | 게임 시작 조건, 승리 조건, 스폰 관리 | `AMyGameMode` |
+| **AGameStateBase** | 현재 게임의 상태 저장 | 점수, 진행 상황 관리 | `AMyGameState` |
+| **APlayerState** | 플레이어별 정보 저장 | 플레이어 이름, 점수, 핑 | `AMyPlayerState` |
+| **UUserWidget** | UI 요소 | 화면에 표시할 HUD, 메뉴 | `UMyHUDWidget` |
+
 ---
 
 ## **3. 게임 시스템 및 메커니즘 구현**

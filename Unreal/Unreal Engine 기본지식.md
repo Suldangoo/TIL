@@ -68,6 +68,9 @@
 - **Gameplay Framework 주요 클래스**: `ACharacter`, `AController`, `AGameModeBase`, `UUserWidget` 등
 </aside>
 
+- Unreal Engine의 모든 기능은 C++과 블루프린트를 함께 사용해 구현한다.
+    - 게임 개발자가 C++로 성능이 중요한 핵심 기능을 만들고, 블루프린트로 게임 디자이너들이 쉽게 조작할 수 있도록 구현하는 편이다.
+
 ---
 
 ## **3. 게임 시스템 및 메커니즘 구현**

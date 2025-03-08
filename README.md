@@ -39,9 +39,9 @@
 <br>
 
 ## **Unity**
-- [C#](Unity/C#.md)
-- [유니티 엔진](Unity/유니티%20엔진.md)
-- [MMORPG 게임 개발 강의](/Unity/MMORPG%20게임%20개발%20강의/Part1.%20C#%20기초%20프로그래밍%20입문.md)
+- [C#](/Unity/C#.md)
+- [유니티 엔진](/Unity/유니티%20엔진.md)
+- [MMORPG 게임 개발 강의](/Unity/MMORPG%20게임%20개발%20시리즈/Part%201.%20C#%20기초%20프로그래밍%20입문.md)
 
 <br>
 

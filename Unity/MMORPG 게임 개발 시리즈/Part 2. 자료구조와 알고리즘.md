@@ -165,3 +165,21 @@ public MyList<int> _data = new MyList<int>();
 - 많은 사람들이 오해할 수 있는 부분이, 리사이징을 할 때 for문이 N만큼 회전하기 때문에 동적 배열의 삽입 시간 복잡도가 O(n)이라고 생각하기 쉽다.
 - 그러나 이는 Count가 Capacity보다 클 때 일어나고, 이런 경우는 거시적으로 봤을 때 정말 없기 때문에 우리는 O(1)이라고 동적 배열의 삽입 시간 복잡도를 약속했다.
 - 오히려 배열에서 데이터를 삭제하는 과정이 모든 데이터를 한 칸씩 앞으로 이동시켜야 하기 때문에 O(n)이 소요된다.
+
+### 연결 리스트 구현 연습
+
+```csharp
+public int[] _data = new int[25]; // 배열
+public LinkedList<int> _data3 = new LinkedList<int>(); // 연결 리스트 
+
+public void Initialize()
+{
+    LinkedListNode<int> node = _data3.AddLast(10);
+
+    _data3.Remove(node);
+}
+```
+
+- 링크드 리스트는 배열과 다르게 도중 삽입과 삭제가 쉽다.
+- 원하는 노드 부분을 LinkedListNode라는 자료형의 데이터에 삽입하고, 삭제하면 빠르게 해당 연결 리스트에서 사라진다.
+- 연결 리스트는 모든 노드들의 위치가 전혀 연결되어있지 않으니 가능하다.

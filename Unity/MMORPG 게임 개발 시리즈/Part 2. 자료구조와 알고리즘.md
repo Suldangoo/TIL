@@ -183,3 +183,50 @@ public void Initialize()
 - 링크드 리스트는 배열과 다르게 도중 삽입과 삭제가 쉽다.
 - 원하는 노드 부분을 LinkedListNode라는 자료형의 데이터에 삽입하고, 삭제하면 빠르게 해당 연결 리스트에서 사라진다.
 - 연결 리스트는 모든 노드들의 위치가 전혀 연결되어있지 않으니 가능하다.
+
+```csharp
+class Room<T>
+{
+    public T Data;
+    Room<T> Next;
+    Room<T> Prev;
+}
+```
+
+- 모든 노드가 이어져있을 수 있기 때문에 위와 같이 설계한다.
+
+```csharp
+class RoomList<T>
+{
+    public Room<T> Head = null;
+    public Room<T> Tail = null;
+    public int Count = 0;
+
+    public Room<T> AddLast(T data)
+    {
+        Room<T> newRoom = new Room<T>();
+        newRoom.Data = data;
+
+        // 방이 하나도 없다면 헤드로 설정
+        if (Head != null)
+        {
+            Head = newRoom;
+        }
+
+        // 기존의 방과 새로운 방 연결
+        if (Tail != null)
+        {
+            Tail.Next = newRoom;
+            newRoom.Prev = Tail;
+        }
+
+        Tail = newRoom; // 꼬리 방 설정
+        Count++;
+
+        return newRoom;
+    }
+}
+```
+
+- 연결 리스트 클래스를 만들어 다음과 같이 다음 방 추가를 구현할 수 있다.
+- Head와 Tail을 항상 관리하며, 방이 2개 이상 있다면 이전 방과 다음 방의 주소를 연결해야 한다.

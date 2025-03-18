@@ -264,3 +264,82 @@ public void Remove(Room<T> room)
 - 연결 리스트는 동적 배열과 다르게 삽입과 삭제에 for문이 하나도 없다. 데이터의 주소들을 앞이나 뒤로 당길 필요가 전혀 없기 때문이다.
     - 즉, 삽입과 삭제의 소요 시간이 O(1)이다.
 - 단, 중간 접근은 지원하지 않기 때문에, 최악의 경우 O(n)이 소요될 수 있다. 배열은 빠른 접근이 가능한 것과 비교된다.
+
+## 3. 미로 준비
+
+### 맵 만들기
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.PerformanceData;
+using System.Text;
+
+namespace Algorithm
+{
+    class Board
+    {
+        public enum TileType
+        {
+            Empty,
+            Wall
+        }
+
+        const char CIRCLE = '\u25cf';
+        public TileType[,] _tile;
+        public int _size;
+
+        public void Initialize(int size)
+        {
+            _tile = new TileType[size, size];
+            _size = size;
+
+            for (int y = 0; y < _size; y++)
+            {
+                for (int x = 0; x < _size; x++)
+                {
+                    if (x == 0 || x == _size - 1 || y == 0 || y == _size - 1)
+                    {
+                        _tile[y, x] = TileType.Wall;
+                    }
+                    else
+                    {
+                        _tile[y, x] = TileType.Empty;
+                    }
+                }
+            }
+        }
+
+        public void Render()
+        {
+            ConsoleColor prevColor = Console.ForegroundColor;
+
+            for (int y = 0; y < _size; y++)
+            {
+                for (int x = 0; x < _size; x++)
+                {
+                    Console.ForegroundColor = GetTileColor(_tile[y, x]);
+                    Console.Write(CIRCLE); // 쓰기
+                }
+                Console.WriteLine();
+            }
+
+            Console.ForegroundColor = prevColor;
+        }
+
+        ConsoleColor GetTileColor(TileType type)
+        {
+            switch (type)
+            {
+                case TileType.Empty:
+                    return ConsoleColor.Green;
+                case TileType.Wall:
+                    return ConsoleColor.Red;
+                default:
+                    return ConsoleColor.Green;
+            }
+        }
+    }
+}
+
+```

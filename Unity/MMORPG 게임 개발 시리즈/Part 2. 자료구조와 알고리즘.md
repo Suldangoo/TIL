@@ -384,3 +384,68 @@ namespace Algorithm
 }
 
 ```
+
+### Binary Tree 미로 생성 알고리즘
+
+- Mazes for Programmers 저서에 나오는 가장 대표적인 2가지 알고리즘 구현 목표
+- x나 y 좌표가 짝수인 경우에 모두 벽으로 밀어버리는 것으로 시작
+
+```csharp
+private void GenerateByBinaryTree()
+{
+    for (int y = 0; y < _size; y++)
+    {
+        for (int x = 0; x < _size; x++)
+        {
+            if (x % 2 == 0 || y % 2 == 0)
+            {
+                _tile[y, x] = TileType.Wall;
+            }
+            else
+            {
+                _tile[y, x] = TileType.Empty;
+            }
+        }
+    }
+
+    // 랜덤으로 우측 혹은 아래로 길을 뚫는다
+    Random rand = new Random();
+    for (int y = 0; y < _size; y++)
+    {
+        for (int x = 0; x < _size; x++)
+        {
+            if (x % 2 == 0 || y % 2 == 0)
+            {
+                continue;
+            }
+
+            if (x == _size - 2 && y == _size - 2)
+                continue;
+
+            if (y == _size - 2)
+            {
+                _tile[y, x + 1] = TileType.Empty;
+                continue;
+            }
+
+            if (x == _size - 2)
+            {
+                _tile[y + 1, x] = TileType.Empty;
+                continue;
+            }
+
+            if (rand.Next(0, 2) == 0)
+            {
+                _tile[y, x + 1] = TileType.Empty;
+            }
+            else
+            {
+                _tile[y + 1, x] = TileType.Empty;
+            }
+        }
+    }
+}
+```
+
+- 랜덤으로 우측 혹은 아래의 길을 뚫는 작업으로 미로를 구성한다.
+- 단 이럴 경우 가장 아래와 가장 우측이 막히려면 반드시 한 쪽으로 뚫리도록 조건문을 추가해야하고, 그러다보니 맵의 가장 오른쪽 줄과 아랫줄은 쭉 뚫려있는 단점이 존재한다.

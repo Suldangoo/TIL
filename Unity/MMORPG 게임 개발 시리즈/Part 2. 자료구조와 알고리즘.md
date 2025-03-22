@@ -517,3 +517,64 @@ private void GenerateBySideWinder()
 
 - 이전까지 길 중 하나를 랜덤해서 아래로 뚫기 때문에 모양이 더욱 불규칙적이고 이쁘다.
 - 단, 최종 벽을 뚫어버리는 문제를 임의로 막았기 때문에 여전히 가장 오른쪽 줄과 아래 줄이 막혀있는 문제가 존재한다.
+
+### 플레이어 이동
+
+- 모든 객체지향 프로그래밍이 으레 그렇듯, 플레이어라는 객체가 수행해야 하는 기능이라면 외부가 아닌 플레이어 클래스 내에 넣는것이 좋다.
+- 프로퍼티를 활용해 변수를 자신만 고치고, 남들은 get만 하게 설정한다.
+- Update 로직을 만들 때, 그냥 단순히 1틱마다 행동하면 너무 빠르기 때문에 꼭 deltaTick 등의 개념을 넣어 절대 시간 기준을 만드는 것이 좋다.
+
+```csharp
+class Player
+{
+    public int PosY { get; private set; }
+    public int PosX { get; private set; }
+    Random _random = new Random();
+
+    Board _board;
+
+    public void Initialize(int posY, int posX, int destY, int destX, Board board)
+    {
+        PosY = posY;
+        PosX = posX;
+
+        _board = board;
+    }
+
+    const int MOVE_TICK = 100;
+    int _sumTick = 0;
+
+    public void Update(int deltaTick)
+    {
+        _sumTick += deltaTick;
+        if (_sumTick >= MOVE_TICK)
+        {
+            _sumTick = 0;
+
+            // 0.1초마다 실행될 로직
+            int randValue = _random.Next(0, 5);
+            switch (randValue)
+            {
+                case 0: // 상
+                    if (PosY - 1 >= 0 && _board.Tile[PosY - 1, PosX] == Board.TileType.Empty)
+                        PosY = PosY - 1;
+                    break;
+                case 1: // 하
+                    if (PosY + 1 < _board.Size && _board.Tile[PosY + 1, PosX] == Board.TileType.Empty)
+                        PosY = PosY + 1;
+                    break;
+                case 2: // 좌
+                    if (PosX - 1 >= 0 && _board.Tile[PosY, PosX - 1] == Board.TileType.Empty)
+                        PosX = PosX - 1;
+                    break;
+                case 3: // 우
+                    if (PosX + 1 < _board.Size && _board.Tile[PosY, PosX + 1] == Board.TileType.Empty)
+                        PosX = PosX + 1;
+                    break;
+            }
+        }
+    }
+}
+```
+
+- 배열 내에서 움직일 땐 항상 range 체크를 해서, 이동하고자 하는 좌표가 유효한지 체크해주어야 안전하다.

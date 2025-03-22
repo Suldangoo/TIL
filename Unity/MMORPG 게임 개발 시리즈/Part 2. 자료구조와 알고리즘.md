@@ -449,3 +449,71 @@ private void GenerateByBinaryTree()
 
 - 랜덤으로 우측 혹은 아래의 길을 뚫는 작업으로 미로를 구성한다.
 - 단 이럴 경우 가장 아래와 가장 우측이 막히려면 반드시 한 쪽으로 뚫리도록 조건문을 추가해야하고, 그러다보니 맵의 가장 오른쪽 줄과 아랫줄은 쭉 뚫려있는 단점이 존재한다.
+
+### SideWinder 미로 생성 알고리즘
+
+- 바이너리 트리와 다르게, 일단 1/2 확률로 연산을 하는 것은 마찬가지이나, 아래로 길을 뚫어야 하는 일이 생긴다면, 이전까지 모든 노드들 중에서 랜덤한 하나의 노드를 선택해 아래로 뚫는 것이다.
+
+```csharp
+private void GenerateBySideWinder()
+{
+    for (int y = 0; y < _size; y++)
+    {
+        for (int x = 0; x < _size; x++)
+        {
+            if (x % 2 == 0 || y % 2 == 0)
+            {
+                _tile[y, x] = TileType.Wall;
+            }
+            else
+            {
+                _tile[y, x] = TileType.Empty;
+            }
+        }
+    }
+
+    // 랜덤으로 우측 혹은 아래로 길을 뚫는다
+    Random rand = new Random();
+    for (int y = 0; y < _size; y++)
+    {
+        int count = 1;
+        for (int x = 0; x < _size; x++)
+        {
+            if (x % 2 == 0 || y % 2 == 0)
+            {
+                continue;
+            }
+
+            if (x == _size - 2 && y == _size - 2)
+                continue;
+
+            if (y == _size - 2)
+            {
+                _tile[y, x + 1] = TileType.Empty;
+                continue;
+            }
+
+            if (x == _size - 2)
+            {
+                _tile[y + 1, x] = TileType.Empty;
+                continue;
+            }
+
+            if (rand.Next(0, 2) == 0)
+            {
+                _tile[y, x + 1] = TileType.Empty;
+                count++; // 우측 길을 몇 번 뚫었는지 기록
+            }
+            else
+            {
+                int randomIndex = rand.Next(0, count);
+                _tile[y + 1, x - randomIndex * 2] = TileType.Empty;
+                count = 1;
+            }
+        }
+    }
+}
+```
+
+- 이전까지 길 중 하나를 랜덤해서 아래로 뚫기 때문에 모양이 더욱 불규칙적이고 이쁘다.
+- 단, 최종 벽을 뚫어버리는 문제를 임의로 막았기 때문에 여전히 가장 오른쪽 줄과 아래 줄이 막혀있는 문제가 존재한다.

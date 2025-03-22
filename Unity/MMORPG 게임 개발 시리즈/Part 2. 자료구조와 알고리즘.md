@@ -578,3 +578,19 @@ class Player
 ```
 
 - 배열 내에서 움직일 땐 항상 range 체크를 해서, 이동하고자 하는 좌표가 유효한지 체크해주어야 안전하다.
+
+### 오른손 법칙
+
+- 방향을 Enum 타입으로 정하고, 우수법을 통해 미로를 찾는다.
+
+```csharp
+enum Dir
+{
+    Up = 0,
+    Left = 1,
+    Down = 2,
+    Right = 3,
+}
+
+int _dir = (int)Dir.Up;
+```

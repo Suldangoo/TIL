@@ -610,3 +610,56 @@ int[] frontX = new int[] { 0, -1, 0, 1 };
 ```
 
 - 이렇게 되면 두 배열의 각 인덱스에 현재 방향을 넣었을 때, 내가 얼마나 이동해야하는지를 바로 알 수 있게 된다.
+
+- 이 길찾기 알고리즘을 초기화 과정 안에 모두 해버리고, 이동한 좌표 데이터를 모두 한 리스트에 넣은 후 렌더링에서 이를 하나씩 그리는 방식으로 구현한다.
+
+```csharp
+_points.Add(new Pos(PosY, PosX));
+
+// 목적지 도착 전에는 계속 실행
+while (PosY != board.DestY || PosX != board.DestX)
+{
+    // 1. 현재 바라보는 방향 기준 오른쪽이 갈 수 있는가
+    if (_board.Tile[PosY + rightY[_dir], PosX + rightX[_dir]] == Board.TileType.Empty)
+    {
+        // 오른쪽 방향으로 90도 회전
+        _dir = (_dir - 1 + 4) % 4;
+
+        // 앞으로 전진
+        PosY = PosY + frontY[_dir];
+        PosX = PosX + frontX[_dir];
+        _points.Add(new Pos(PosY, PosX));
+    }
+    // 2. 현재 바라보는 방향 기준 전진할 수 있는가
+    else if (_board.Tile[PosY + frontY[_dir], PosX + frontX[_dir]] == Board.TileType.Empty)
+    {
+        // 앞으로 전진
+        PosY = PosY + frontY[_dir];
+        PosX = PosX + frontX[_dir];
+        _points.Add(new Pos(PosY, PosX));
+    }
+    else
+    {
+        // 왼쪽 방향으로 90도 회전
+        _dir = (_dir + 1 + 4) % 4;
+    }
+}
+```
+
+```csharp
+public void Update(int deltaTick)
+{
+    if (_lastIndex >= _points.Count)
+        return;
+
+    _sumTick += deltaTick;
+    if (_sumTick >= MOVE_TICK)
+    {
+        _sumTick = 0;
+
+        PosY = _points[_lastIndex].Y;
+        PosX = _points[_lastIndex].X;
+        _lastIndex++;
+    }
+}
+```

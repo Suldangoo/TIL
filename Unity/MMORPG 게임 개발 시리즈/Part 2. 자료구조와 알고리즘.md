@@ -674,3 +674,25 @@ public void Update(int deltaTick)
 - 둘 다 선형 자료구조이다.
 - 스택은 LIFO 자료구조이며, 큐는 FIFO 자료구조이다.
 - 두 자료구조 모두 중간에 있는 데이터를 활용하긴 어려우며, 가장 처음이나 마지막 데이터를 활용해야 한다.
+
+```csharp
+static void Main(string[] args)
+{
+    Stack<int> stack = new Stack<int>();
+    Queue<int> queue = new Queue<int>();
+}
+```
+
+- C#은 기본적으로 Stack과 Queue 자료구조를 고맙게도 지원해준다.
+
+```csharp
+stack.Push(1);
+stack.Push(2);
+
+int data_1 = stack.Peek();
+int data_2 = stack.Pop();
+```
+
+- 스택의 연산에는 Push와 Pop이 있으며, 가장 위 요소를 삭제는 안하되 보고싶다면 Peek를 사용한다.
+    - 스택이 비어있는 경우에 Pop을 하면 크래쉬가 난다.
+    - 스택 내 요소들의 개수를 알고싶다면 stack.Count를 사용할 수 있다.

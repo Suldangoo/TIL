@@ -795,3 +795,22 @@ public void DFS(int now)
     }
 }
 ```
+
+- 인접 리스트에서의 DFS는 아래와 같다.
+
+```csharp
+public void DFS2(int now)
+{
+    Console.WriteLine(now);
+    visited[now] = true;
+
+    foreach (int next in adjList[now])
+    {
+        // 연결되어있는 요소들만 들어오기 때문에 연결 체크는 할 필요 없음
+        if (visited[next]) // 이미 방문했다면 스킵
+            continue;
+
+        DFS2(next); // 하위 노드에 대해 재귀
+    }
+}
+```

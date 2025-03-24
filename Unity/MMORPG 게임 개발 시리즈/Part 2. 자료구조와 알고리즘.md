@@ -768,3 +768,30 @@ class Graph
     - BFS (Breadth First Search, 너비 우선 탐색)
 - DFS는 우선 먼저 보이는 길로 들어가는 타입이다. 따라서 가장 깊은 곳까지 무작정 들어간 후, 더 이상 갈 길이 없다면 되돌아가며 깊은 길로 계속 향한다.
 - BFS는 모든 길을 꼼꼼히 하나씩 탐험하는 타입이다. 보였던 모든 길을 다 탐색한 후에야 다음 깊이의 방을 또 하나씩 들어가본다.
+
+### DFS (깊이 우선 탐색)
+
+- DFS의 핵심 풀이법은 재귀이다.
+- 재귀를 사용하기 위해서 방문 체크 배열은 반드시 전역으로 있어야 한다.
+- 인접 행렬일 때의 DFS는 아래와 같다.
+
+```csharp
+// now에서 출발하여, 연결 정점 확인 후 아직 미방문 상태라면 방문한다.
+bool[] visited = new bool[6];
+
+public void DFS(int now)
+{
+    Console.WriteLine(now);
+    visited[now] = true;
+
+    for (int next = 0; next < 6; next++)
+    {
+        if (adj[now, next] == 0) // 연결되어 있지 않으면 스킵
+            continue;
+        if (visited[next]) // 이미 방문했다면 스킵
+            continue;
+
+        DFS(next); // 하위 노드에 대해 재귀
+    }
+}
+```

@@ -814,3 +814,18 @@ public void DFS2(int now)
     }
 }
 ```
+
+- 더불어 만약 끊긴 그래프가 존재할 경우엔, 모든 그래프를 전부 순회할 수 없기 때문에, 모든 노드에 대해서 전부 한 번씩 출발해보도록 해야 모든 노드를 살펴볼 수 있다.
+    - 물론 살펴본 뒤 방문된 노드에선 출발하지 않는다.
+
+```csharp
+public void SearchAll()
+{
+    visited = new bool[6];
+    for (int now = 0; now < 6; now++)
+    {
+        if (visited[now] == false)
+            DFS(now);
+    }
+}
+```

@@ -998,3 +998,66 @@ void BFS()
 - BFS로 이동하되, 이동 경로에 부모님을 반드시 지정
 - 탐색이 끝났다면 목적지 → 출발지 순으로 이동하며 경로에 저장
 - 마지막에 출발 좌표까지 저장 후 역순으로 돌려서 출발지 → 목적지 루트 완성
+### 다익스트라 최단 경로 알고리즘
+
+- BFS의 단점은 목적지 뿐만이 아니라 모든 길을 전부 다 순회하며, 조금 제한적인 상황에서만 가능하다.
+    - 특히 가중치가 없는 경우만 가능하고, 가중치가 있다면 BFS를 사용하기 매우 까다롭고 어렵다.
+- 가중치가 있는 그래프에서의 BFS는 절대 최단경로를 보장하지 않는다.
+- 가중치가 있는 경우엔 다익스트라 혹은 A* 알고리즘을 사용해야 한다.
+- BFS와 유사하나, 지점을 예약하는 시점에서 해당 지점까지의 거리를 적고, 방문하지 않았다면 이미 예약된 지점이라도 다시 거리를 갱신해야 한다.
+
+```csharp
+public void Dijikstra(int start)
+{
+    bool[] visited = new bool[6];
+    int[] distance = new int[6]; // 다익스트라 거리 측정 배열
+    Array.Fill(distance, Int32.MaxValue);
+
+    distance[start] = 0;
+
+    while (true)
+    {
+        // 제일 좋은 후보를 찾는다
+
+        int closest = Int32.MaxValue;
+        int now = -1;
+
+        for (int i = 0; i < 6; i++)
+        {
+            // 이미 방문한 정점은 스킵
+            if (visited[i])
+                continue;
+
+            // 아직 발견된 적이 없거나, 기존 후보보다 멀다면 스킵
+            if (distance[i] == Int32.MaxValue || distance[i] >= closest)
+                continue;
+
+            // 여태껏 발견한 최단 거리 후보는 정보 갱신
+            closest = distance[i];
+            now = i;
+        }
+
+        // 다음 후보가 하나도 없다 -> 종료
+        if (now == -1)
+            break;
+
+        // 제일 좋은 후보를 찾았으니 방문
+        visited[now] = true;
+
+        // 방문한 정점과 인접한 정점 조사, 상황에 따라 발견한 최단거리 갱신
+        for (int next = 0; next < 6; next++)
+        {
+            // 연결되지 않은 정점 스킵
+            if (adj[now, next] == -1)
+                continue;
+            // 방문한 정점 스킵
+            if (visited[next])
+                continue;
+            // 새로 조사된 정점의 최단거리 갱신
+            int nextDist = distance[now] + adj[now, next];
+            if (nextDist < distance[next])
+                distance[next] = nextDist;
+        }
+    }
+}
+```

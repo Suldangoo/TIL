@@ -829,3 +829,40 @@ public void SearchAll()
     }
 }
 ```
+
+### BFS (너비 우선 탐색)
+
+- BFS의 핵심 풀이법은 큐다.
+- 똑같이 방문 체크 배열을 전역 변수로 두어 불필요한 파라미터 전달을 없앤다.
+- 최대한 클리어한 방에서 가장 가까운 방을 모두 클리어하고, 이후 클리어한 방들에서 가장 가까운 방들을 이어 클리어하는 방식이다.
+    - 이를 구현하기 위해선 갈 방을 미리 예약하는 시스템이 필요하고, 이를 큐로 구현한다.
+    - 예약 대기열은 뭐든지 큐로 구현하는걸 우선으로 두는 것이 좋다.
+- 인접 행렬에서의 BFS는 아래와 같다.
+
+```csharp
+public void BFS(int start)
+{
+    bool[] found = new bool[6];
+
+    Queue<int> q = new Queue<int>();
+    q.Enqueue(start);
+    found[start] = true;
+
+    while(q.Count > 0)
+    {
+        int now = q.Dequeue();
+        Console.WriteLine(now);
+
+        for (int next = 0; next < 6; next++)
+        {
+            if (adj[now, next] == 0)
+                continue;
+            if (found[next])
+                continue;
+
+            q.Enqueue(next);
+            found[next] = true;
+        }
+    }
+}
+```

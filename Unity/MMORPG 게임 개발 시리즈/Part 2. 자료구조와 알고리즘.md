@@ -937,3 +937,64 @@ public void BFS(int start)
 
 - 그래프는 꼭 인접 행렬이나 인접 리스트로 초기화할 필요가 없다.
 - 만약 문제에서 주어진 그래프가 고유의 그래프 표현 방법이라면, 그 방법대로 BFS를 구현할 수 있다.
+```csharp
+void BFS()
+{
+    int[] deltaY = new int[] { -1, 0, 1, 0 };
+    int[] deltaX = new int[] { 0, -1, 0, 1 };
+
+    bool[,] found = new bool[_board.Size, _board.Size];
+    Pos[,] parent = new Pos[_board.Size, _board.Size];
+
+    Queue<Pos> q = new Queue<Pos>();
+    q.Enqueue(new Pos(PosY, PosX));
+    found[PosY, PosX] = true;
+    parent[PosY, PosX] = new Pos(PosY, PosX);
+
+    while (q.Count > 0)
+    {
+        Pos pos = q.Dequeue();
+        int nowY = pos.Y;
+        int nowX = pos.X;
+
+        for (int i = 0; i < 4; i++)
+        {
+            int nextY = nowY + deltaY[i];
+            int nextX = nowX + deltaX[i];
+
+            if (nextY < 0 || nextY >= _board.Size || nextX < 0 || nextX >= _board.Size)
+                continue;
+            if (_board.Tile[nextY, nextX] == Board.TileType.Wall)
+                continue;
+            if (found[nextY, nextX])
+                continue;
+
+            q.Enqueue(new Pos(nextY, nextX));
+            found[nextY, nextX] = true;
+            parent[nextY, nextX] = new Pos(nowY, nowX);
+        }
+    }
+
+    // 출발점을 목적지로 설정 후 거꾸로 출발
+    int y = _board.DestY;
+    int x = _board.DestX;
+
+    // 부모와 본인이 같은 점, 즉 출발점이 되기 전까지 반복
+    while (parent[y, x].Y != y || parent[y, x].X != x)
+    {
+        _points.Add(new Pos(y, x)); // 현재 좌표 경로에 추가
+
+        // 부모 좌표로 이동
+        Pos temp = parent[y, x];
+        y = temp.Y;
+        x = temp.X;
+    }
+
+    _points.Add(new Pos(PosY, PosX)); // 출발점까지 경로에 추가
+    _points.Reverse(); // 목적지 -> 출발점 순으로 구했으므로 역순으로 변경
+}
+```
+
+- BFS로 이동하되, 이동 경로에 부모님을 반드시 지정
+- 탐색이 끝났다면 목적지 → 출발지 순으로 이동하며 경로에 저장
+- 마지막에 출발 좌표까지 저장 후 역순으로 돌려서 출발지 → 목적지 루트 완성

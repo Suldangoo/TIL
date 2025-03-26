@@ -894,3 +894,41 @@ public void BFS(int start)
     }
 }
 ```
+
+- 또한 BFS는 최단거리 길 찾기에 굉장히 요긴하게 쓰인다.
+    - 즉, 방 탐색을 할 때마다 이 방의 부모가 누구인지, 루트부터 얼만큼의 거리를 왔는지도 모두 추출이 가능하다.
+- 부모와 거리를 추적하는걸 포함한 BFS는 아래와 같다.
+
+```csharp
+public void BFS(int start)
+{
+    bool[] found = new bool[6];
+    int[] parent = new int[6];
+    int[] distance = new int[6];
+
+    Queue<int> q = new Queue<int>();
+    q.Enqueue(start);
+    found[start] = true;
+    parent[start] = start;
+    distance[start] = 0;
+
+    while (q.Count > 0)
+    {
+        int now = q.Dequeue();
+        Console.WriteLine(now);
+
+        for (int next = 0; next < 6; next++)
+        {
+            if (adj[now, next] == 0)
+                continue;
+            if (found[next])
+                continue;
+
+            q.Enqueue(next);
+            found[next] = true;
+            parent[next] = now;
+            distance[next] = distance[now] + 1;
+        }
+    }
+}
+```

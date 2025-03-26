@@ -866,3 +866,31 @@ public void BFS(int start)
     }
 }
 ```
+
+- 인접 리스트에서의 BFS는 아래와 같다.
+
+```csharp
+public void BFS(int start)
+{
+    bool[] found = new bool[6];
+
+    Queue<int> q = new Queue<int>();
+    q.Enqueue(start);
+    found[start] = true;
+
+    while (q.Count > 0)
+    {
+        int now = q.Dequeue();
+        Console.WriteLine(now);
+
+        foreach (int next in adjList[now])
+        {
+            if (found[next])
+                continue;
+
+            q.Enqueue(next);
+            found[next] = true;
+        }
+    }
+}
+```

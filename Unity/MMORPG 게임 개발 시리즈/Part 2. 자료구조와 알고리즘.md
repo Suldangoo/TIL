@@ -1099,3 +1099,52 @@ class TreeNode<T>
 - 중요한 것은 트리의 클래스다.
 - 데이터를 담을 공간과, 자식을 담을 변수가 필요하다.
     - 이 때 자식 변수의 자료형은 자신과 같은 트리 노드로 해주어야 재귀적 성질로 서브트리가 만들어진다.
+```csharp
+static TreeNode<string> MakeTree()
+{
+    TreeNode<string> root = new TreeNode<string>() { Data = "R1 개발실" };
+    {
+        {
+            TreeNode<string> node = new TreeNode<string>() { Data = "디자인팀" };
+            node.Children.Add(new TreeNode<string>() { Data = "전투" });
+            node.Children.Add(new TreeNode<string>() { Data = "경제" });
+            node.Children.Add(new TreeNode<string>() { Data = "스토리" });
+            root.Children.Add(node);
+        }
+        {
+            TreeNode<string> node = new TreeNode<string>() { Data = "프로그래밍팀" };
+            node.Children.Add(new TreeNode<string>() { Data = "서버" });
+            node.Children.Add(new TreeNode<string>() { Data = "클라" });
+            node.Children.Add(new TreeNode<string>() { Data = "엔진" });
+            root.Children.Add(node);
+        }
+        {
+            TreeNode<string> node = new TreeNode<string>() { Data = "아트팀" };
+            node.Children.Add(new TreeNode<string>() { Data = "배경" });
+            node.Children.Add(new TreeNode<string>() { Data = "캐릭터" });
+            root.Children.Add(node);
+        }
+    }
+
+    return root;
+}
+```
+
+- 루트 노드를 설정하고, 자식 노드를 만들어 루트에 추가할 수 있다.
+- 괄호 안에서 사용한 이름은, 다른 계층의 괄호 안까지 스코프가 도달하지 못해 같은 이름을 사용할 수 있다.
+
+```csharp
+static void PrintTree(TreeNode<string> root)
+{
+    // 접근
+    Console.WriteLine(root.Data);
+
+    foreach (TreeNode<string> child in root.Children)
+    {
+        PrintTree(child);
+    }
+}
+```
+
+- 트리를 순회할 땐 재귀적 성질을 이용한다.
+- foreach문을 활용해 모든 자식에게 똑같은 함수를 실행하게끔 하면, 트리의 모든 자식을 전부 순회한다.

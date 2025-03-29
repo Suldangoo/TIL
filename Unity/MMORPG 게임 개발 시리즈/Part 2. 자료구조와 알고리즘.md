@@ -1148,3 +1148,19 @@ static void PrintTree(TreeNode<string> root)
 
 - 트리를 순회할 땐 재귀적 성질을 이용한다.
 - foreach문을 활용해 모든 자식에게 똑같은 함수를 실행하게끔 하면, 트리의 모든 자식을 전부 순회한다.
+```csharp
+static int GetHeight(TreeNode<string> root)
+{
+    int height = 0;
+
+    foreach (TreeNode<string> child in root.Children)
+    {
+        int newHeight = GetHeight(child) + 1;
+        height = Math.Max(height, newHeight);
+    }
+
+    return height;
+}
+```
+
+- 재귀 함수를 활용해서 트리의 높이를 구하는 함수를 만들 수 있다.

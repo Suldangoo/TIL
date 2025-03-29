@@ -1294,3 +1294,96 @@ public int Pop()
     - 이건 우리가 임의로 만드는 것이 아닌, 언어 내에 기본적으로 지원하는 타입이다.
     - 이를 어떤 클래스에 상속받았다면, 반드시 CompareTo() 함수를 구현해야 한다.
     - 기본적인 int 자료형은 IComparable을 지원한다.
+
+## 6. A* 길찾기 알고리즘
+
+### A* 알고리즘 구현
+
+- 다익스트라나 BFS는 굳이 목적지를 알려주지 않고, 모든 경로를 전부 탐색해서 길을 찾는 알고리즘
+- A*는 딱 한 지점만 지정하고 가기때문에 비교적 효율적이다.
+    - 목적지까지 얼마나 가까워짐에 따라서 가산점을 주는 방식이다.
+
+```csharp
+void AStar()
+{
+    int[] deltaY = new int[] { -1, 0, 1, 0 };
+    int[] deltaX = new int[] { 0, -1, 0, 1 };
+    int[] cost = new int[] { 1, 1, 1, 1 };
+
+    // 점수 매기기
+    // F = G + H
+    // F : 최종 점수, 작을 수록 좋으며 경로에 따라 달라짐
+    // G : 시작점에서 해당 좌표까지 이동하는데 드는 비용, 작을 수록 좋으며 경로에 따라 달라짐
+    // H : 휴리스틱. 목적지에서 얼마나 가까운지 직선거리로 계산, 작을 수록 좋으며 고정됨
+
+    // (y, x) 좌표에 이미 방문했는지 여부 (방문 = closed 상태)
+    bool[,] closed = new bool[_board.Size, _board.Size];
+
+    // (y, x) 좌표에 가는 길을 한 번이라도 발견했는지
+    // 발견 X => MaxValue
+    // 발견 O => F = G + H
+    int[,] open = new int[_board.Size, _board.Size];
+    for (int y = 0; y < _board.Size; y++)
+        for (int x = 0; x < _board.Size; x++)
+            open[y, x] = Int32.MaxValue;
+
+    Pos[,] parent = new Pos[_board.Size, _board.Size];
+
+    // 오픈 리스트에 있는 정보들 중에서 가장 좋은 후보를 빨리 뽑는 도구
+    PriorityQueue<PQNode> pq = new PriorityQueue<PQNode>();
+
+    // 시작점 발견 (예약 진행)
+    open[PosY, PosX] = Math.Abs(_board.DestY - PosY) + Math.Abs(_board.DestX - PosX);
+    pq.Push(new PQNode() { F = Math.Abs(_board.DestY - PosY) + Math.Abs(_board.DestX - PosX), G = 0, Y = PosY, X = PosX });
+    parent[PosY, PosX] = new Pos(PosY, PosX);
+
+    while (pq.Count > 0)
+    {
+        // 제일 좋은 후보를 찾는다
+        PQNode node = pq.Pop();
+
+        // 동일한 좌표를 여러 경로를 찾아서, 더 빠른 경로로 인해 이미 방문된 경우면 스킵
+        if (closed[node.Y, node.X])
+            continue;
+
+        // 방문
+        closed[node.Y, node.X] = true;
+        
+        // 목적지에 도착했다면 알고리즘 종료
+        if (node.Y == _board.DestY && node.X == _board.DestX)
+            break;
+
+        // 상하좌우 이동할 수 있는 좌표인지 확인 후 예약한다
+        for (int i = 0; i < deltaY.Length; i++)
+        {
+            int nextY = node.Y + deltaY[i];
+            int nextX = node.X + deltaX[i];
+
+            // 유효범위 벗어나면 스킵
+            if (nextY < 0 || nextY >= _board.Size || nextX < 0 || nextX >= _board.Size)
+                continue;
+            // 벽이라면 스킵
+            if (_board.Tile[nextY, nextX] == Board.TileType.Wall)
+                continue;
+            // 이미 방문한 곳이면 스킵
+            if (closed[nextY, nextX])
+                continue;
+
+            // 비용 계산
+            int g = node.G + cost[i];
+            int h = Math.Abs(_board.DestY - nextY) + Math.Abs(_board.DestX - nextX);
+
+            // 다른 경로에서 더 빠른 길을 찾았다면 스킵
+            if (open[nextY, nextX] < g + h)
+                continue;
+
+            // 지금까지 찾은 케이스중에선 가장 빠른 값이니 예약 진행
+            open[nextY, nextX] = g + h;
+            pq.Push(new PQNode() { F = g + h, G = g, Y = nextY, X = nextX });
+            parent[nextY, nextX] = new Pos(node.Y, node.X);
+        }
+    }
+
+    CalcPathFromParent(parent);
+}
+```

@@ -1185,3 +1185,100 @@ static int GetHeight(TreeNode<string> root)
     - 값을 삭제할 땐, 보통 큐나 스택처럼 가장 최댓값을 삭제하게 된다.
         - 삭제 후에 빈 부모 노드는 포화 이진트리상 가장 마지막 값을 꺼내와 채운다.
         - 이후 부모에 넣었던 새로운 노드의 자식 중 더 큰 값과 위치를 바꿔간다.
+
+### 우선순위 큐
+
+- 큐의 구현 인터페이스는 아래와 같다.
+
+```csharp
+class PriorityQueue
+{
+    public void Push(int data)
+    {
+
+    }
+
+    public int Pop()
+    {
+        return 0;
+    }
+
+    public int Count()
+    {
+        return 0;
+    }
+}
+```
+
+```csharp
+public void Push(int data)
+{
+    // 힙의 맨 끝에 새로운 데이터 삽입
+    _heap.Add(data);
+
+    // 상향식으로 힙을 재구성
+    int now = _heap.Count - 1;
+    while (now > 0)
+    {
+        int next = (now - 1) / 2;
+        if (_heap[now] < _heap[next])
+            break;
+
+        // 두 값 교체
+        int temp = _heap[now];
+        _heap[now] = _heap[next];
+        _heap[next] = temp;
+
+        // 검사 위치 이동
+        now = next;
+    }
+}
+```
+
+```csharp
+public int Pop()
+{
+    // 반환할 데이터를 따로 저장
+    int ret = _heap[0];
+
+    // 마지막 데이터를 루트로 이동
+    int lastIndex = _heap.Count - 1;
+    _heap[0] = _heap[lastIndex];
+    _heap.RemoveAt(lastIndex);
+    lastIndex--;
+
+    // 자식 노드와 비교해 더 큰 자식과 비교 후 교체
+    int now = 0;
+    while (true)
+    {
+        int left = 2 * now + 1;
+        int right = 2 * now + 2;
+
+        int next = now;
+
+        // 왼쪽 값이 현재보다 크면 왼쪽으로 이동
+        if (left <= lastIndex && _heap[next] < _heap[left])
+            next = left;
+        // 오른쪽 값이 현재보다 크면 오른쪽으로 이동
+        if (right <= lastIndex && _heap[next] < _heap[right])
+            next = right;
+
+        // 자식이 모두 현재값보다 작다면 종료
+        if (next == now)
+            break;
+
+        // 두 값 교체
+        int temp = _heap[now];
+        _heap[now] = _heap[next];
+        _heap[next] = temp;
+
+        // 검사 위치 이동
+        now = next;
+    }
+
+    return ret;
+}
+```
+
+- n개의 노드가 있다면 대략적으로 그 트리의 높이는 log2(N)이다.
+- 따라서 트리의 노드가 엄청 많아지더라도 Push와 Pop의 시간 복잡도가 굉장히 낮은 편이다.

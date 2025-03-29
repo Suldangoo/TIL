@@ -1085,3 +1085,17 @@ public void Dijikstra(int start)
         - 높이는 거꾸로 잎이 0이고, 루트가 가장 높다.
         - ‘트리의 높이’ 라고 한다면 해당 트리의 가장 긴 높이를 말한다.
     - 트리의 서브 트리 또한 트리 형태이기 때문에, 트리 연산을 할 때 재귀함수가 애용된다.
+
+### 트리 구현 연습
+
+```csharp
+class TreeNode<T>
+{
+    public T Data { get; set; }
+    public List<TreeNode<T>> Children { get; set; } = new List<TreeNode<T>>();
+}
+```
+
+- 중요한 것은 트리의 클래스다.
+- 데이터를 담을 공간과, 자식을 담을 변수가 필요하다.
+    - 이 때 자식 변수의 자료형은 자신과 같은 트리 노드로 해주어야 재귀적 성질로 서브트리가 만들어진다.

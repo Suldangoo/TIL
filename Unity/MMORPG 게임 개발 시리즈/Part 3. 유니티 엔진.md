@@ -51,3 +51,15 @@ void Start()
 - MonoBehaviour가 있어야만 이 클래스가 컴포넌트로 인식될 수 있다.
 - MonoBehaviour를 상속 해제하면 일반 C# 스크립트처럼 사용할 수 있다.
     - 물론 이러면 Unity에서 제공하는 함수는 사용하지 못한다.
+
+## Singleton 패턴
+
+- Visual Studio에서 브레이크포인트를 찍고, Unity와 연결을 통해 디버깅을 할 수 있다.
+- 다른 게임 오브젝트를 가져오는 방법은 너무나 많다.
+
+```csharp
+GameObject go = GameObject.Find("@Managers");
+Managers mg = go.GetComponent<Managers>();
+```
+
+- 그러나 Find()는 오브젝트가 많을 수록 부하가 심하기에 거의 사용하지 않는다.

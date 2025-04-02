@@ -120,3 +120,45 @@ static void Init()
     }
 }
 ```
+- 이렇게 만든다면 게임오브젝트가 없더라도 새로 오브젝트를 생성한다.
+- DontDestroyOnLoad를 통해 게임 오브젝트가 절대 제거되지 않도록 한다.
+- 이 또한 개선점이 필요하다. 가져올 때 메서드가 아닌 프로퍼티로 가져오면 가독성과 성능이 좋아진다.
+
+```csharp
+static Managers s_instance;
+public static Managers Instance { get { Init(); return s_instance; } }
+
+// Start is called before the first frame update
+void Start()
+{
+    Init();
+}
+
+// Update is called once per frame
+void Update()
+{
+    
+}
+
+static void Init()
+{
+    if (s_instance == null)
+    {
+        GameObject go = new GameObject { name = "@Managers" };
+
+        if (go == null)
+        {
+            go = new GameObject { name = "@Managers" };
+            go.AddComponent<Managers>();
+        }
+        DontDestroyOnLoad(go);
+        s_instance = go.AddComponent<Managers>();
+    }
+}
+```
+
+```csharp
+Managers mg = Managers.Instance;
+```
+
+- 물론 이 형태가 정석적인 싱글톤 패턴의 형태는 아니나 기본적인 개념은 유사하다.

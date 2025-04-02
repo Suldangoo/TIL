@@ -98,3 +98,25 @@ void Start()
 
 Managers mg = Managers.GetInstance();
 ```
+- Start를 이렇게 만들어두면, 여러개가 있더라도 하나만 인정하게 되기는 한다.
+- 그러나 이 경우에도 Managers라는 오브젝트가 없다면 할당되지 않는다.
+    - 만약 오브젝트가 없을 때 인스턴스를 가져오려고 한다면 null이 가져와진다.
+    - 즉, 가져올 때 null이라면 새로 인스턴스를 할당시켜야 한다.
+
+```csharp
+static void Init()
+{
+    if (Instance == null)
+    {
+        GameObject go = new GameObject { name = "@Managers" };
+
+        if (go == null)
+        {
+            go = new GameObject { name = "@Managers" };
+            go.AddComponent<Managers>();
+        }
+        DontDestroyOnLoad(go);
+        Instance = go.AddComponent<Managers>();
+    }
+}
+```

@@ -87,3 +87,14 @@ public class Managers : MonoBehaviour
 ```
 
 - static 전역 변수를 만들어서 어디서든 접근 가능하게 하고, 인스턴스를 return하는 것이다.
+- 그러나 이렇게 구현하면 만약 GamaManager가 여러 개 존재할 때, 서로가 자기가 왕이라며 하나의 static 변수에 자신의 게임 매니저를 덮어씌우는 일이 발생한다.
+
+```csharp
+void Start()
+{
+    GameObject go = GameObject.Find("@Managers");
+    Instance = go.GetComponent<Managers>();
+}
+
+Managers mg = Managers.GetInstance();
+```

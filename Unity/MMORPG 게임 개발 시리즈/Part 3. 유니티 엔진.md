@@ -63,3 +63,27 @@ Managers mg = go.GetComponent<Managers>();
 ```
 
 - 그러나 Find()는 오브젝트가 많을 수록 부하가 심하기에 거의 사용하지 않는다.
+- 따라서 싱글톤 패턴을 사용해서 유일한 매니저를 보장함과 동시에 쉽게 인스턴스를 가져오게끔 할 수 있다.
+- 기본적으로 우리가 일차적으로 생각할 수 있는, 유일 인스턴스 보장은 아래와 같다.
+
+```csharp
+public class Managers : MonoBehaviour
+{
+    static Managers Instance;
+    public static Managers GetInstance() { return Instance; }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Instance = this;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+```
+
+- static 전역 변수를 만들어서 어디서든 접근 가능하게 하고, 인스턴스를 return하는 것이다.

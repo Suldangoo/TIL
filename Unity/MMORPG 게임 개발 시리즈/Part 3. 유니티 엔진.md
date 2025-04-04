@@ -265,3 +265,34 @@ public class InputManager
 
 - 우선 단순 C#을 사용하여 Action이라는 이미 주어진 델리게이트를 사용한다.
     - 델리게이트의 문법 특성상, 여기에 원하는 함수를 삽입할 수 있게 된다.
+- OnUpdate라는 메서드를 만들어서 무언가 입력되고 있는게 있는지 체크하고, 있다면 Invoke()를 통해 자신을 구독하는 객체들에게 이벤트를 뿌린다. 즉, 옵저버 패턴을 구현한다.
+
+```csharp
+InputManager _input = new InputManager();
+public static InputManager Input { get { return Instance._input; } }
+
+void Update()
+{
+    _input.OnUpdate();
+}
+```
+
+- 싱글턴 패턴으로 구현한 게임 매니저에게 인풋 매니저 객체를 하나 만들어서 가져오게끔 하고, 매 프레임마다 인풋 매니저의 OnUpdate를 실행한다.
+
+```csharp
+void Start()
+{
+    Managers.Input.KeyAction -= OnKeyboard; // 기존에 등록된 이벤트가 있을 수도 있으니 제거
+    Managers.Input.KeyAction += OnKeyboard; // 이벤트에 내 함수 등록
+}
+
+void OnKeyboard()
+{
+		// 이동 관련 로직
+}
+```
+
+- 플레이어 컨트롤러 스크립트에 가서, 게임매니저가 생성한 인풋 매니저 객체의 KeyAction 델리게이트에 따로 빼둔 이동 관련 로직을 구독시킨다.
+- 구독 전에 한 번 뺌으로서 이중 구독을 방지할 수 있다.
+- 이 구조로 만들면 물론 매 프레임마다 update에서 체크하는 것은 똑같지만, 이제 인풋을 받는 모든 객체가 하나같이 update문에서 입력을 체크받을 필요가 사라진다. update문을 돌리며 인풋을 감지하고, 이벤트를 뿌리는 것은 게임 매니저의 인풋 매니저 객체가 유일하게 일을 하게 되기 때문이다.
+- 또한 특정 입력을 받았을 때 누가 이 구독을 신청했길래 이벤트가 발생하는지 궁금하다면 인풋 매니저의 Invoke()에서 브레이크 포인트를 잡고 F11을 눌러 다음 프레임으로 실행해보면, 어떤것이 실행되는지 디버깅도 비교적 쉽게 할 수 있다.

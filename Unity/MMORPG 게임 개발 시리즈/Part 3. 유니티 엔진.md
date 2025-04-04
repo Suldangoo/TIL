@@ -238,3 +238,30 @@ transform.position.normalize // 크기가 1인 단위 벡터를 리턴
 - 크기를 구하기 위해선 모든 좌표를 제곱하고 더한 피타고라스의 정리를 사용한다.
 - 단위 벡터를 구할 땐 자기 자신의 좌표값들을 모두 크기로 나누어주면 크기가 1인 벡터가 된다.
 - 이렇게 Vector3 자료형이 알아서 operator 을 직접 설정해두었기 때문에 우리는 벡터에도 상수를 곱할 수 있다.
+
+## Input Manager (옵저버 패턴)
+
+- update 문 안에서 입출력장치의 감지를 if문으로 다 체크해버리면 성능적으로도, 가독성적으로도 매우 좋지 않을 것이다.
+- 즉 인풋에 대해서는 특정 매니저에서 감지한 후 이벤트를 건너받아 처리하면 훨씬 깔끔해지게 될 것이다.
+
+```csharp
+using System;
+using UnityEngine;
+
+public class InputManager
+{
+    public Action KeyAction = null;
+
+    public void OnUpdate()
+    {
+        if (Input.anyKey == false)
+            return;
+
+        if (KeyAction != null)
+            KeyAction.Invoke();
+    }
+}
+```
+
+- 우선 단순 C#을 사용하여 Action이라는 이미 주어진 델리게이트를 사용한다.
+    - 델리게이트의 문법 특성상, 여기에 원하는 함수를 삽입할 수 있게 된다.

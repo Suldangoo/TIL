@@ -197,3 +197,23 @@ transform.position += Vector3.forward * Time.deltaTime * _speed; // 리팩토링
 ```
 
 - 단순한 크기 1의 방향 벡터를 원하는거라면 벡터를 직접 만들 필요 없이 이미 예약된 키워드를 쓸 수 있다.
+- Rotation을 회전시킨 후 위 이동 메서드를 사용하면 돌아가있는 채 이동하는 것을 볼 수 있는데, 이는 이동 방식이 상대 좌표 방식이 아닌 **월드 좌표계 방식**이기 때문이다.
+- 유니티 Scene에서 X키를 누르면 해당 오브젝트 기준 좌표계를 볼 수 있다.
+
+```csharp
+transform.position += transform.TransformDirection(Vector3.forward * Time.deltaTime * _speed);
+```
+
+- transform.TransformDirection() 메서드를 사용해 로컬에서 월드로 좌표 계산을 해줄 수 있다.
+- 파라미터 안 방향을 월드 기준으로 해석하면 어디인가? 를 계산해주는 메서드이다.
+    - 움직이고 싶은 방향을 로컬 기준으로 정했기 때문에, 그걸 월드 좌표계상에서 얼마인지 계산해주는 것이다.
+
+| Local → World | World → Local |
+| --- | --- |
+| TransformDirection | InverseTransformDirection |
+
+```csharp
+transform.Translate(Vector3.forward * Time.deltaTime * _speed);
+```
+
+- 혹은 이렇게 position에 더하는 것이 아닌, Translate 메서드를 쓰면 바로 로컬 좌표로 이동하게 해주는 메서드 자체가 별도로 존재한다.

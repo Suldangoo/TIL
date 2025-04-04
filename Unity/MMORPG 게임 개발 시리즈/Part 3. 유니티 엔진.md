@@ -321,3 +321,21 @@ void OnKeyboard()
 - 특정 프리팹의 모든 기능을 따르되, 추가적인 정보를 가지고 있는 프리팹
 - 이미 프리팹인 오브젝트를 한 번 더 에셋으로 드래그하면 알림창이 뜨는데, 이 때 프리팹 바리언트를 선택할 수 있다.
     - 아이콘의 한 면이 회색으로 변한 것을 볼 수 있다.
+
+## Resource Manager
+
+- 프리팹 역시 코드 상에서 생성할 수 있다.
+
+```csharp
+Instantiate(prefabObject); // 프리팹 인스턴스화
+Destroy(prefabObject); // 오브젝트 제거
+```
+
+- 프리팹을 담기 위한 자료형은 GameObject이다.
+- 오브젝트를 할당하는 것 역시 인스펙터에서 할 수 있지만, 코드상으로도 가능하다. 게임의 규모가 클 수록 코드상에서 오브젝트나 프리팹을 할당하는 것이 훨씬 좋다.
+
+```csharp
+prefabObject = Resources.Load<GameManager>("Prefabs/Tank");
+```
+
+- 이 때 중요한건, Assets 폴더의 아래 Resources라는 이름의 디렉터리에 있는 자료들만 가져올 수 있다.

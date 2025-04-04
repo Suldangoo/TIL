@@ -181,3 +181,19 @@ Managers mg = Managers.Instance;
     - 키보드 입력에 따른 이동을 구현한다.
 - 보통 같은 오브젝트 안에 있는 컴포넌트를 가져올 땐 GetComponent를 사용해야하지만, 기본적으로 모든 오브젝트에 들어있는 트랜스폼을 조작할 땐 그런 작업 필요없이 transform만 사용해도 된다.
     - 포지션에 새로운 벡터를 더하여 이동을 구현할 수 있다.
+
+## Position
+
+- update 문에 바로 이동을 바로 박아버리면 매 프레임마다 이동하기 때문에 너무 빠르게 이동한다.
+- 따라서 이런 경우엔 Time.deltaTime을 사용해야 한다.
+    - deltaTime은 한 프레임이 완료될 때까지 걸린 시간이다. 이걸 곱하면 내가 원하는 좌표까지 이동하는 데에 어떤 프레임을 가진 하드웨어라도 동일한 크기만큼 이동하게 된다.
+- 변수를 인스펙터에 꺼내서 고쳐쓰고 싶다면 public을 쓰거나 [SerializeField]를 쓸 수 있다.
+    - SerializeField의 대괄호 방식은 C#의 문법인 리플렉션이다.
+- 이를 직렬화라고 하고, 오브젝트나 프리팹 등도 할당시킬 수 있다.
+
+```csharp
+transform.position += new Vector3(0, 0, 1) * Time.deltaTime * _speed;
+transform.position += Vector3.forward * Time.deltaTime * _speed; // 리팩토링
+```
+
+- 단순한 크기 1의 방향 벡터를 원하는거라면 벡터를 직접 만들 필요 없이 이미 예약된 키워드를 쓸 수 있다.

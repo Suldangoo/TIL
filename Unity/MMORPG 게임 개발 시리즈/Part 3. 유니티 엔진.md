@@ -339,3 +339,50 @@ prefabObject = Resources.Load<GameManager>("Prefabs/Tank");
 ```
 
 - 이 때 중요한건, Assets 폴더의 아래 Resources라는 이름의 디렉터리에 있는 자료들만 가져올 수 있다.
+- 그럼에도 모든 스크립트가 하나같이 이렇게 리소스를 가져오게 되면, 너무 많은 스크립트가 리소스를 덕지덕지 가져오기 때문에 이 또한 매니저가 있는 것이 조금 더 구조적으로 유리하다.
+
+```csharp
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ResourceManager
+{
+    public T Load<T>(string path) where T : Object
+    {
+        return Resources.Load<T>(path);
+    }
+
+    public GameObject Instantiate(string path, Transform parent = null)
+    {
+        GameObject prefab = Load<GameObject>($"Prefabs/{path}");
+        if (prefab == null)
+        {
+            Debug.LogError($"Failed to load prefab at path: {path}");
+            return null;
+        }
+
+        return Object.Instantiate(prefab, parent);
+    }
+
+    public void Destroy(GameObject obj)
+    {
+        if (obj == null)
+        {
+            Debug.LogError("Attempted to destroy a null object.");
+            return;
+        }
+        Object.Destroy(obj);
+    }
+}
+```
+
+- 리소스 매니저를 통해 오브젝트 가져오기, 인스턴스화, 오브젝트 제거를 만들 수 있다.
+- 이 역시 게임 매니저에서 만들어둔 후 객체를 할당해둘 수 있다.
+
+```csharp
+Manager.Resource.Instantiate("Tank");
+```
+
+- 추후 사용할 땐 이렇게 적기만 해도 깔끔하게 정리할 수 있다.
+- 이 역시 디버깅이 매우 좋고 코드가 깔끔해진다는 장점이 있다.

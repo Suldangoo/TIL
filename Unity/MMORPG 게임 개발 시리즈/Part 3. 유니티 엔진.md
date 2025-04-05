@@ -457,3 +457,14 @@ bool isCasting = Physics.Raycast(transform.position, Vector3.forward, out hit, 1
 - 레이캐스트 메서드를 통해 실제로 레이캐스팅을 쏠 수 있다.
 - Physics.Raycast는 방향벡터만 넣어도 알아서 무한히 쏘지만, 파라미터 버전에 따라 길이를 입력할 수도 있다.
     - out hit 파라미터를 통해 충돌한 오브젝트의 정보를 가져올 수 있다.
+- 만약 바라보는 방향에 쏘고 싶다면, 아래와 같이 로컬 좌표를 써야 한다.
+
+```csharp
+Vector3 look = transform.TransformDirection(Vector3.forward);
+
+Debug.DrawRay(transform.position, look * 10, Color.red);
+```
+
+- 일반 레이캐스팅은 먼저 닿은 오브젝트만 처리하지만, RaycastAll()을 사용하면 부딪친 모든 오브젝트들의 정보를 가져올 수 있다.
+    - 이 경우 리턴하는 것이 RaycastHit 배열이다.
+- 또한 플레이어와 카메라 사이에 물체가 있어서 플레이어를 가리는 경우, 플레이어를 투명하게 보이게 할 수도 있지만, 카메라로부터 플레이어까지 레이캐스팅을 쏴서 오브젝트가 있다면 그 앞으로 카메라가 이동하게끔 하면 할 수 있다.

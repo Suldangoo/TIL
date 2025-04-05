@@ -503,3 +503,32 @@ Camera.main.ScreenToViewportPoint(스크린 픽셀 좌표)
 - 투영을 하게 되면 3D상의 Z좌표 (깊이값) 하나가 아예 사라진다.
 - 투명의 원리는, 아까 썼던 Far에 캡쳐된 것을 Near까지 축소시켜 캡쳐된 것을 그리는 것이다. 그렇기에 Near와 Far가 중요하다.
 - 또 투영은 반드시 비율을 지킨다. 멀리 있었을 때 중앙에 있었다면 가까이에 와도 중앙에 있을 것이다.
+- 우리가 클릭한 지점에서의 월드 좌표를 구해보자.
+
+```csharp
+Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vecor3(Input.mousePosition.x,
+																														 Input.mousePosition.y,
+																														 Camera.main.nearClipPlane));
+																														 
+Vector3 dir = mousePos - Camera.main.transform.position;
+dir = dir.normalized;
+
+RaycastHit hit;
+if (Physics.Raycast(Camera.main.transform.position, dir, out hit))
+{
+	Debug.Log(hit.collider.gameObject.name);
+}
+```
+
+- 위는 그래픽적인 원리를 풀기 위한 로직이고, 유니티에선 조금 더 쉽게 사용할 수 있다.
+    - 그것은 Ray를 이용하는 것이다.
+
+```csharp
+Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+RaycastHit hit;
+if(Physices.Raycast(ray, out hit))
+{
+	Debug.Log(hit.collider.gameObject.name);
+}
+```

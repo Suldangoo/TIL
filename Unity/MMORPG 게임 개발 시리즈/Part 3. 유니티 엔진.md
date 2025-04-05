@@ -569,3 +569,10 @@ LayerMask mask = LayerMask.GetMask("Monster") | LayerMask.GetMask("Wall");
 - 위와 같은 방식으로 레이어 마스크 이름을 가져와 사용할 수도 있다.
 - 이는 int형이 아님에도 저 파라미터에 넣을 수 있는데, 이는 LayerMask 자료형의 특징이다.
     - public int value를 가지고 있고, operator 연산도 지원하기 때문이다.
+
+### Tag
+
+- 태그는 오브젝트에 특정 칭호를 입히는 것과 마찬가지이다.
+- 메인 카메라를 찾는 방식은 MainCamera 태그가 붙은걸 찾는 방식이기 때문에 카메라는 태그를 빼선 안된다.
+- 이 외에도 직접 만든 오브젝트에 태그를 붙여서 FindGameObjectWithTag 등의 메서드를 사용할 수 있다.
+    - Tag 역시 레이어마스크처럼 직접 만들 수 있다.

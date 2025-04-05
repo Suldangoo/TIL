@@ -438,3 +438,22 @@ private void OnTriggerExit(Collision collision) { ]
 
 - 둘 다 콜라이더가 있어야 하며, 둘 중 하나는 Trigger모드고, 둘 중 하나는 리지드바디가 있어야 한다.
 - 원하는 부분에 도달했을 때 이벤트가 발동되고 싶다면 매우 적절하다.
+
+## Raycasting
+
+- 3D 공간의 오브젝트를 2D 화면에서 마우스로 찍었는데, 3D 오브젝트가 선택되는 것은 굉장히 신기한 일이다.
+- 스타크래프트같은 경우에도 3D 게임에서 마우스로 유닛을 클릭했을 때 특정 오브젝트가 선택된다.
+- 2D 화면에서 특정 좌표 지점을 찍었을 때, 카메라 각도부터 오브젝트 선택까지 구현하는 것은 매우 힘들다.
+- Raycasting은 말 그대로 레이저를 쏴서 먼저 부딪치는 오브젝트를 지정하는 기술이다.
+- 마우스로 화면을 클릭하면 카메라 지점부터 3D 월드까지 레이저를 발사하는 것이다.
+
+```csharp
+Debug.DrawRay(transform.position, Vector3.forward * 10, Color.red);
+
+RaycastHit hit;
+bool isCasting = Physics.Raycast(transform.position, Vector3.forward, out hit, 10);
+```
+
+- 레이캐스트 메서드를 통해 실제로 레이캐스팅을 쏠 수 있다.
+- Physics.Raycast는 방향벡터만 넣어도 알아서 무한히 쏘지만, 파라미터 버전에 따라 길이를 입력할 수도 있다.
+    - out hit 파라미터를 통해 충돌한 오브젝트의 정보를 가져올 수 있다.

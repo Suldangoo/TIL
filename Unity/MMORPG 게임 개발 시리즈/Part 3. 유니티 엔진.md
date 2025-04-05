@@ -407,3 +407,19 @@ Manager.Resource.Instantiate("Tank");
     - 예를 들어 엘리베이터를 만든다고 친다면, 콜라이더만 있고 리지드바디가 없을 땐 직접 position을 움직여야 하며, 이 땐 올라탄 플레이어가 떨리거나 튕기는 문제가 일어날 수 있지만, Kinematic Rigidbody를 사용하면 플레이어와의 충돌을 계산할 수 있다. 즉, 움직이는 오브젝트라면 리지드바디가 필요하다.
 - 또한 리지드바디의 Freeze Rotation을 체크하면 더이상 회전값이 잠금되어 넘어지지 않는다.
 - Collision 이벤트는 리지드바디가 있어야만 실행되므로 두 오브젝트 중 하나에는 필수적이다.
+```csharp
+private void OnCollisionEnter(Collision collision) { }
+private void OnCollisionStay(Collision collision) { }
+private void OnCollisionExit(Collision collision) { }
+```
+
+- 위의 OnCollision 메서드가 발동되기 위해서는 다음과 같은 조건이 필요하다.
+    - 나 혹은 상대에게 리지드바디가 있어야 하며, 키네메틱은 Off
+    - 나한테 콜라이더가 있어야 하며, 트리거는 Off
+    - 상대한테 콜라이더가 있어야 하며, 트리거는 Off
+
+```csharp
+private void OnCollisionEnter(Collision collision) {
+	collision.gameObject.name; // 이런 식으로 충돌한 대상의 정보를 가져올 수 있다.
+}
+```

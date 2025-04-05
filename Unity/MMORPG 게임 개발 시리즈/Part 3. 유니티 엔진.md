@@ -423,3 +423,18 @@ private void OnCollisionEnter(Collision collision) {
 	collision.gameObject.name; // 이런 식으로 충돌한 대상의 정보를 가져올 수 있다.
 }
 ```
+
+## Trigger
+
+- 물리와 전혀 상관 없이, 해당 충돌 판정 범위 안으로 들어왔냐, 얼마나 들어와 있냐 등을 판정하고자 할 때 쓰는 것이 Trigger Collider 옵션이다.
+- is Trigger을 켠 이상 더 이상 충돌은 일어나지 않는다.
+- 또한 둘 다 리지드바디가 없다면 Trigger 이벤트가 발생하지 않는다.
+
+```csharp
+private void OnTriggerEnter(Collision collision) { }
+private void OnTriggerStay(Collision collision) { ]
+private void OnTriggerExit(Collision collision) { ]
+```
+
+- 둘 다 콜라이더가 있어야 하며, 둘 중 하나는 Trigger모드고, 둘 중 하나는 리지드바디가 있어야 한다.
+- 원하는 부분에 도달했을 때 이벤트가 발동되고 싶다면 매우 적절하다.

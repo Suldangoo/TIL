@@ -636,3 +636,22 @@ LayerMask mask = LayerMask.GetMask("Monster") | LayerMask.GetMask("Wall");
     - 각 분기에 맞는 상태별 Update()문을 호출한다. 이러면 상태별로 업데이트문을 따로 관리하게 된다.
 - 단, 단점이라고 한다면 동시에 두 가지 이상의 상태를 가질 수 있는 일은 없다.
     - 즉 움직이면서 스킬 캐스팅 등의 상태를 관리하려고 한다면 조금 어려워진다.
+```csharp
+void Update()
+{
+    switch (_state)
+    {
+        case PlayerState.Die:
+            UpdateDie();
+            break;
+        case PlayerState.Moving:
+            UpdateMoving();
+            break;
+        case PlayerState.Idle:
+            UpdateIdle();
+            break;
+    }
+}
+```
+
+- 단 고전적이고 정석적인 형태의 상태 패턴의 경우엔 Enum으로 분류하는 것이 아닌 상태별로 클래스가 존재하고, 현재 상태를 클래스로 관리하는 경우도 존재한다.

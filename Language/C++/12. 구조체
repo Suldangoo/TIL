@@ -1,0 +1,34 @@
+```cpp
+struct Mystruct {
+	// 구조체 멤버엔 변수와 함수가 존재할 수 있다.
+	int first;
+	int second;
+	
+	int Sum() {
+		return first + second;
+	}
+}
+
+Mystruct a; // 해당 구조체로 변수 할당
+
+a.first = 123;
+```
+
+```cpp
+Mystruct *ptr_a = &a; // 포인터 가능
+
+cout << ptr_a -> first; // 포인터 구조체는 ->로 멤버 지정
+```
+
+```cpp
+Mystruct pairs[10]; // 배열도 가능
+
+for (int i = 0; i < 10; i++) {
+	pairs[i].first = i;
+	pairs[i].second = i * 10;
+}
+
+for (int i = 0; i < 10; i++) {
+	cout << pairs[i].Sum() << endl;
+}
+```

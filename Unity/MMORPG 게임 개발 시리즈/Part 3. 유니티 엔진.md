@@ -838,3 +838,11 @@ T Get<T> (int idx) where T : UnityEngine.Object
 
 - 이후 위와 같이 _objects에서 원하는타입의 오브젝트를 가져오는 메서드를 작성한다.
 - 이 경우 원하는 오브젝트 번호를 입력만 해도 가져올 수 있게 된다.
+
+```csharp
+Get<Text>((int)Texts.ScoreText).text = "Binding Test";
+```
+
+- 이 경우 Enum 이름이 숫자로 변환되며 해당 오브젝트를 가져오고, 텍스트를 수정하게 된다.
+- 프리팹을 사용해 생성 후에도 당연히 가능하다.
+- 즉 UI 오브젝트를 만들 때 이름만 좀 주의한다면 바로 사용 가능해질 것이다.

@@ -751,3 +751,76 @@ public void OnClickedButton()
 - 실전 프로젝트로 가고 게임 규모가 커질수록, 모든 함수에 다 SelializedField를 전부 할당하고, 모든 버튼 오브젝트의 인스펙터의 On Click()에 할당해주어야 한다. 이건 규모가 크면 좋지 않다.
     - 따라서 버튼에 할당하는 것 역시 코드로 하는 것이 경우에 따라 더 우아할 수 있다.
     - 이렇게 원하는 버튼에 원하는 오브젝트를 전부 게임 시작 시 연결해주는 것을 UI자동화라고 한다.
+
+## UI 자동화
+
+- 지금은 On Click을 등록할 때 일일히 인스펙터에서 드래그를 해 할당하고, 텍스트 컴포넌트에서 직접 컴포넌트를 가져와 무식하게 텍스트를 수정했다.
+- 우선 Enum을 선언해서 모든 버튼과 텍스트에  대한 정의를 만든다.
+- 이후 Bind()라는 메서드를 만들어 이름이 겹치면 연결되게끔 자동화한다.
+    - 해당 Enum을 가져올 땐 직접 할당이 아닌 리플렉션을 활용한다.
+- 우선 Util이라는 이름의 기본 C# 스크립트를 만들어, 필요한 기능성 메서드를 전역적으로 몰아넣는 전역 메서드 라이브러리를 하나 만들면 편리하다.
+
+```csharp
+public static T FindChild<T>(GameObject go, string name = null, bool recursive = false) where T : UnityEngine.Object
+{
+    if (go == null)
+        return null;
+
+    if (recursive == false)
+    {
+        for (int i = 0; i < go.transform.childCount; i++)
+        {
+            Transform child = go.transform.GetChild(i);
+            if (string.IsNullOrEmpty(name) || child.name == name)
+            {
+                T component = child.GetComponent<T>();
+                if (component != null)
+                    return component;
+            }
+        }
+    }
+    else
+    {
+        foreach (T component in go.GetComponentsInChildren<T>())
+        {
+            if (string.IsNullOrEmpty(name) || component.name == name)
+                return component;
+        }
+    }
+}
+```
+
+```csharp
+Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
+enum Buttons
+{
+    PointButton,
+}
+enum Texts
+{
+    PointText,
+    ScoreText,
+}
+
+private void Start()
+{
+    Bind<Button>(typeof(Buttons));
+    Bind<Text>(typeof(Texts));
+}
+
+void Bind<T>(Type type) where T : UnityEngine.Object
+{
+    string[] names = Enum.GetNames(type);
+
+    UnityEngine.Object[] objects = new UnityEngine.Object[names.Length];
+    _objects.Add(typeof(T), objects);
+
+    for (int i = 0; i < names.Length; i++)
+    {
+        objects[i] = Util.FindChild<T>(gameObject, names[i], true);
+    }
+}
+```
+
+- 원하는 이름의 버튼이나 텍스트를 전부 가져와 바인딩하는 것까진 자동화로 이루어진다.
+- Add 이후에 for문으로 자식 오브젝트를 찾는 이유는, 딕셔너리에 Add할 때 값 자체를 넣는게 아닌 해당 배열의 주소를 기억하는 것이라, 이후에 값을 채워도 문제가 없다.

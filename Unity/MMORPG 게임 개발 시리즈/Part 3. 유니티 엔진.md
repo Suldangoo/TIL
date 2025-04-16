@@ -876,3 +876,13 @@ public static GameObject FindChild(GameObject go, string name = null, bool recur
 
 - 모든 게임오브젝트는 transform을 갖고있다는 성질을 이용해서 기존에 만들어둔 함수에 컴포넌트 transform을 넣고 재활용한다.
 - 이후 해당 게임 오브젝트를 리턴하면 그만이다.
+
+```csharp
+Text GetText(int idx) { return Get<Text>(idx); }
+Button GetButton(int idx) { return Get<Button>(idx); }
+Image GetImage(int idx) { return Get<Image>(idx); }
+```
+
+- 위와 같이 자주 사용하는 텍스트, 버튼, 이미지 컴포넌트에 대해선 프리셋 메서드를 만들어두어도 편하다.
+- 위 메서드들은 앞으로 모든 UI들이 사용해야 하므로 UI_Base등의 부모 클래스를 하나 파서 만들어놓고, 접근지정자를 protected로 두어 자식들이 사용할 수 있게 한다.
+- 이후 자식 UI 컴포넌트는 UI_Base를 상속받게 하면 MonoBehaviour 역시 상속받기 때문에 문제없이 사용할 수 있게 된다.

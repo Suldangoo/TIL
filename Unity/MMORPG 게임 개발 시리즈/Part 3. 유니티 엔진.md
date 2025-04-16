@@ -824,3 +824,17 @@ void Bind<T>(Type type) where T : UnityEngine.Object
 
 - 원하는 이름의 버튼이나 텍스트를 전부 가져와 바인딩하는 것까진 자동화로 이루어진다.
 - Add 이후에 for문으로 자식 오브젝트를 찾는 이유는, 딕셔너리에 Add할 때 값 자체를 넣는게 아닌 해당 배열의 주소를 기억하는 것이라, 이후에 값을 채워도 문제가 없다.
+
+```csharp
+T Get<T> (int idx) where T : UnityEngine.Object
+{
+    if (_objects.TryGetValue(typeof(T), out UnityEngine.Object[] objects) == false)
+        return null;
+    if (idx < 0 || idx >= objects.Length)
+        return null;
+    return objects[idx] as T;
+}
+```
+
+- 이후 위와 같이 _objects에서 원하는타입의 오브젝트를 가져오는 메서드를 작성한다.
+- 이 경우 원하는 오브젝트 번호를 입력만 해도 가져올 수 있게 된다.

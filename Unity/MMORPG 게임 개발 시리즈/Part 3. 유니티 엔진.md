@@ -846,3 +846,33 @@ Get<Text>((int)Texts.ScoreText).text = "Binding Test";
 - 이 경우 Enum 이름이 숫자로 변환되며 해당 오브젝트를 가져오고, 텍스트를 수정하게 된다.
 - 프리팹을 사용해 생성 후에도 당연히 가능하다.
 - 즉 UI 오브젝트를 만들 때 이름만 좀 주의한다면 바로 사용 가능해질 것이다.
+
+- 그러나 현재 이 코드상으로는 GameObject를 찾아 리턴받기는 어렵다. 자식을 찾는 과정에서 GameObject 자체는 MonoBehaviour를 상속받지 않아 리턴되지 않기 때문이다.
+    - 즉 현재 위의 코드상으로는 컴포넌트만 찾아오는 것이다.
+
+```csharp
+for (int i = 0; i < names.Length; i++)
+{
+		if (typeof(T) == typeof(GameObject))
+				objects[i] = Util.FindChild(gameObject, names[i], true);
+		else
+		    objects[i] = Util.FindChild<T>(gameObject, names[i], true);
+}
+```
+
+- 위와 같이 Bind함수를 개편한다. GameObject일 때의 예외 FindChild를 하나 더 정의해야 한다.
+
+```csharp
+public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
+{
+    Transform transform = return FindChild<Transform>(go, name, recursive);
+    
+    if (transform == null)
+		    return null
+		
+		return transform.gameObject;
+}
+```
+
+- 모든 게임오브젝트는 transform을 갖고있다는 성질을 이용해서 기존에 만들어둔 함수에 컴포넌트 transform을 넣고 재활용한다.
+- 이후 해당 게임 오브젝트를 리턴하면 그만이다.

@@ -896,3 +896,12 @@ Image GetImage(int idx) { return Get<Image>(idx); }
     - 자동으로 받는 PointerEventData 파라미터에 많은 정보가 있고, 거기에서 마우스의 position도 가져올 수 있다.
 - 이벤트 핸들러에도 Action을 하나 만들어 초기엔 null을 할당하고, 추후 콜백으로 받은 메서드를 발현하기 위해 Invoke를 달아두면 된다.
     - 특정 이벤트에 원하는 메서드를 구독할 때, 해당 이벤트에서만 발생하는 짧은 메서드라면 람다를 사용하는 것도 좋다.
+- Rect Transform의 경우에도, 그냥 transform 지역변수를 사용해도 좋다.
+    - 왜 가능한지 RectTransform이라는 클래스를 보면, 트랜스폼을 상속받고 있기 때문이다.
+- AddUIEvent라는 public static 메서드를 만들어 원하는 액션과 오브젝트를 UI 이벤트에 할당할 수 있는 공용 메서드를 만든다.
+- 이벤트 할당을 위한 스크립트 컴포넌트를 등록하기 위한 공용 메서드도 하나 만들 수 있다.
+    - 만약 컴포넌트가 있다면 쓰고, 없다면 추가한다는 내용이다.
+- Extension Method를 사용하면 더욱 쉽게 만들 수 있다.
+    - Extension 클래스는 static으로 구현하고, Monobehaviour는 제거한다.
+    - this 키워드를 붙여 한 번 거치도록 하면 구현할 수 있다.
+    - 단 콜백이 중요한 경우 두 줄이 가독성 측면에서도 더 좋을 수 있다.

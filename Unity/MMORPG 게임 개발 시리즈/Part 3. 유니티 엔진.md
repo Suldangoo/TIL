@@ -905,3 +905,19 @@ Image GetImage(int idx) { return Get<Image>(idx); }
     - Extension 클래스는 static으로 구현하고, Monobehaviour는 제거한다.
     - this 키워드를 붙여 한 번 거치도록 하면 구현할 수 있다.
     - 단 콜백이 중요한 경우 두 줄이 가독성 측면에서도 더 좋을 수 있다.
+
+## UI Manager
+
+- 보통 화면에 아예 박혀있는 HUD가 있고, 팝업으로 나오는 UI가 존재한다.
+- 따라서 UI들을 팝업용 UI, 비팝업용 UI 두 개로 나누는 것도 좋다.
+- 디렉터리에 Popup UI와 Scene 디렉터리를 만들어 UI 프리팹을 두개로 나눈다.
+    - 이후 UI_Popup과 UI_Scene이라는 C# 스크립트를 만든다.
+    - 팝업 UI와 씬 UI 모두 해당 대장 스크립트를 상속받고 시작할 것이다.
+- UI Manager에는 지역변수 _order가 사용되는데, 이는 가장 최근까지 사용된 sort order를 저장하는 역할이다.
+- 또한 팝업은 스택으로 관리되어야 한다. 가장 마지막에 띄워진 팝업이 먼저 사라져야 하기 때문이다.
+- 스택의 자료형은 UI_Popup으로 두어 컴포넌트를 가지고 있도록 한다.
+    - GameObject로 두지 않는 것이 핵심이다.
+- 이후 UI 프리팹을 Instantiate해준다.
+- 꼭 스택에 Push해주는 것을 잊지 않는다.
+- 추후 ClosePopupUI와 CloseAllPopupUI 메서드를 만들어 스택에서 제거하는 것도 만든다.
+    - ClosePopupUI 메서드의 경우 오버로딩을 통해 파라미터를 하나 받아 원하는 애를 파괴하는게 맞는지 체크하는 버전도 만들어도 좋다.

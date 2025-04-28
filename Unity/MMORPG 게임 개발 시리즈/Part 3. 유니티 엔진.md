@@ -946,3 +946,32 @@ Image GetImage(int idx) { return Get<Image>(idx); }
     - 이 때 사용하는 메서드가 Substring이다.
 - 비주얼 어시스턴트 확장 프로그램을 구매해 사용하면 모든 프로젝트 내 코드에서 원하는 텍스트를 찾아 바꾸기도 가능하다.
 - 프리팹을 생성하는 UI_Manager 클래스의 생성 메서드에 파라미터로 부모를 설정하는 기능을 넣을 수 있다.
+
+# 9. Scene (씬)
+
+## Scene Manager
+
+- 씬을 여러 개 관리하고, 다른 씬으로 전환하는 작업을 책임진다.
+- 씬에 배치된 오브젝트들이 효력을 얻게 되는데, 그 말은 씬에 필수적으로 배치되어야 하는 오브젝트들이 존재해야 한다.
+- 만약 플레이어가 모든 오브젝트들의 매니징을 맡는다면, 플레이어는 씬 안에 있는다는 보장이 없어 적절하지 않다.
+- Scene 스크립트를 만들기 위해, 모든 씬 스크립트의 부모 베이스가 될 BaseScene 스크립트를 작성한다.
+    - Define에 씬별로 Enum을 정의한다.
+
+```csharp
+public class BaseScene : MonoBehaviour
+{
+		public Define.Scene SceneType { get; protected set; } = Define.Scene.Unknown;
+		
+		void Start()
+		{
+		}
+		
+		protected virtual Init()
+		{
+		}
+		
+		public virtual Clear()
+		{
+		}
+}
+```

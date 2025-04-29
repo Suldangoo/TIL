@@ -975,3 +975,17 @@ public class BaseScene : MonoBehaviour
 		}
 }
 ```
+- 이후 모든 씬별로 선봉대장을 맡을 스크립트를 만든다.
+- GameScene의 경우 만들어둔 후, BaseScene을 상속받으면 된다.
+    - 각 씬 매니저에서 해당 씬에 초기화해야 할 UI를 켜고 끄는 등의 명령을 작성한다.
+    - 또한 Scene Type을 매번 해당 씬의 타입에 맞게 정의한다.
+- 모든 UI가 있는 씬엔 EventSystem이 필요하므로, 씬 매니저에서 EventSystem 프리팹을 생성하도록 한다.
+
+```csharp
+Object obj = GameObject.FindObjectOfType(typeof(EventSystem));
+
+if (obj == null)
+		Manager.Resource.Instantiate("UI/EventSystem").name = "@EventSystem";
+```
+
+- 유니티의 라이프사이클 상, Start()는 오브젝트가 비활성화 되어있으면 발휘되지 않지만, Awake()를 사용하면 오브젝트가 비활성화되어있어도 라이프사이클상 오브젝트 활성화보다 더 일찍 일어나기에 반드시 발휘된다.

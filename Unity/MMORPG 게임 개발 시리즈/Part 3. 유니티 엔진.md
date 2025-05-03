@@ -1026,3 +1026,46 @@ SceneManager.LoadScene("Game");
 - 만약 두 개의 오디오 클립을 동시에 실행하면, 첫번쨰 것이 씹히는 것이 아닌, 동시에 같이 실행된다.
 - 오디오 클립 역시 length라는 필드를 사용해서 실행 시간을 확인할 수 있다.
 - 모든 객체가 고유의 오디오 클립을 모두 하나같이 다 들고있을 필요는 없다. 오히려, 모든 오디오 클립을 오디오 매니저가 들고, 각자가 필요한 타이밍에 가져와 재생하는 것이 더 효율적일 수 있다.
+```csharp
+public class SoundManager
+{
+		public enum Sound // Define 등으로 별도로 빠져도 좋음
+		{
+				Bgm,
+				Effect,
+		}
+		
+		AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
+		
+		public void Play(Define.Sound type, string path, float pitch = 1.0f)
+		{
+				if (path.Contains("Sounds/") == false)
+						path = $"Sounds/{path}";
+						
+				if (type == Define.Sound.Bgm)
+				{
+						AudioClip audioClip = Managers.Resource.Load<AudioClip>(path);
+						if (audioClip == null)
+						{
+								Debug.Log($"AudioClip Missing ! {path}");
+								return;
+						}
+						
+						// TODO : Bgm 재생
+				}
+				else 
+				{
+						AudioClip audioClip = Managers.Resource.Load<AudioClip>(path);
+						if (audioClip == null)
+						{
+								Debug.Log($"AudioClip Missing ! {path}");
+								return;
+						}
+						
+						AudioSource audioSource = _audioSources[(int)Define.Sound.Effect];
+						audioSource.pitch = pitch;
+						audioSource.PlayOneShot(audioClip);
+				}
+		}
+}
+```

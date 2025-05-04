@@ -1069,3 +1069,27 @@ public class SoundManager
 		}
 }
 ```
+- 그러나 위와 같이 하면 아직 오디오 소스를 재생하는 근원이 없기에, 오브젝트를 하나 만들어 컴포넌트를 붙여주어야 한다.
+- 따라서 사운드 매니저에 아래와 같이 Init메서드를 만들어준다.
+
+```csharp
+public void Init()
+{
+		GameObject root = GameObject.Find("@Sound");
+		if (root == null)
+		{
+				root = new GameObject { name = "@Sound" };
+				Object.DontDestroyOnLoad(root);
+				
+				string[] soundNames = System.Enum.GetNames(typeof(Define.Sound));
+				for (int i = 0; i < soundNames.Length - 1; i++)
+				{
+						GameObject go = new GameObject { name = soundNames[i] };
+						_audioSources[i] = go.AddComponent<AudioSource>();
+						go.transform.parent = root.transform; // 부모 설정
+				}
+				
+				_audioSources[(int)Define.Sound.Bgm].loop = true;
+		}
+}
+```

@@ -1093,3 +1093,10 @@ public void Init()
 		}
 }
 ```
+- 이후 사용하고 싶다면, 매니저스에 해당 매니저를 등록하고 메서드를 실행시킨다.
+
+```csharp
+Managers.Sound.Play(Define.Sound.Effect, "Sounds/UnityChan/univ0001");
+```
+
+- 지금은 명시적으로 경로를 적어놓지만, 게임의 규모가 커질 수록 별도의 데이터 시트로 데이터와 경로가 링크된 시트가 존재할 것이니 더 커진다면 컨벤션을 조정할 수 있다.
